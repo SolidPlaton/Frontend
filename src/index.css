@@ -1,1 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap');
 @import "tailwindcss";
+
+
+@theme {  
+    --font-inria-sans: "Inria Sans", serif;
+}
