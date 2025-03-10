@@ -1,42 +1,57 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { UserSchemaSignIn, UserSchemaSignInType } from "../../utils/signinValidation";
+
 type FormInput = {
-    placeholder: string
+  placeholder: string;
+  register: any;
+  errors: any;
+};
+
+export function FormInput({ placeholder, register, errors }: FormInput) {
+  return (
+    <div>
+      <input type="text" placeholder={placeholder} {...register} className="text-zinc-200 w-md h-10 border-2 text-lg pl-2.5 outline-none" />
+      {errors && <p className="text-red-500">{errors.message}</p>}
+    </div>
+  );
 }
-
-
-export function FormInput({ placeholder }:FormInput) {
-
-    return (
-        <input type="text" placeholder={placeholder} className="text-zinc-200 w-md h-10 border-2 text-lg pl-2.5 outline-none"/>
-    )
-
-}
-
 
 export default function Login() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    return (
-        <div className="flex flex-col justify-center items-center w-screen bg-slate-900">
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserSchemaSignInType>({
+    resolver: zodResolver(UserSchemaSignIn),
+  });
 
+  function handleSignin(data: UserSchemaSignInType) {
+    const { email, password } = data;
 
-            <h1 className="text-4xl font-normal text-orange-400 mb-20">
-                Login
-            </h1>
+    if (email && password) {
+      auth.logar(email, password);
+      navigate("/");
+    }
+  }
 
-            <form action="" className="flex flex-col justify-center items-center gap-y-7">
-
-                <FormInput placeholder="email"/>
-
-                <FormInput placeholder="senha"/>
-
-                <button type="submit" className="text-black text-3xl bg-orange-400 w-64 h-16 cursor-pointer">
-                    Entrar
-                </button>
-
-                <p className="text-zinc-200">não possui uma conta? cadastre-se</p>
-            </form>
-
-
-        </div>
-    )
-
+  return (
+    <div className="flex flex-col justify-center items-center w-screen bg-slate-900">
+      <h1 className="text-4xl font-normal text-orange-400 mb-20">Login</h1>
+      <form onSubmit={handleSubmit((data) => handleSignin(data))} className="flex flex-col justify-center items-center gap-y-7">
+        <FormInput placeholder="email" register={register("email")} errors={errors.email} />
+        <FormInput placeholder="senha" register={register("password")} errors={errors.password} />
+        <button type="submit" className="text-black text-3xl bg-orange-400 w-64 h-16 cursor-pointer">
+          Entrar
+        </button>
+        <p className="text-zinc-200">não possui uma conta? cadastre-se</p>
+      </form>
+    </div>
+  );
 }
