@@ -6,15 +6,16 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserSchemaSignIn, UserSchemaSignInType } from "../../utils/signinValidation";
 
 type FormInput = {
+  type: string,
   placeholder: string;
   register: any;
   errors: any;
 };
 
-export function FormInput({ placeholder, register, errors }: FormInput) {
+export function FormInput({ type, placeholder, register, errors }: FormInput) {
   return (
     <div>
-      <input type="text" placeholder={placeholder} {...register} className="text-zinc-200 w-md h-10 border-2 text-lg pl-2.5 outline-none" />
+      <input type={type} placeholder={placeholder} {...register} className="text-zinc-200 w-md h-10 border-2 text-lg pl-2.5 outline-none" />
       {errors && <p className="text-red-500">{errors.message}</p>}
     </div>
   );
@@ -45,8 +46,8 @@ export default function Login() {
     <div className="flex flex-col justify-center items-center w-screen bg-slate-900">
       <h1 className="text-4xl font-normal text-orange-400 mb-20">Login</h1>
       <form onSubmit={handleSubmit((data) => handleSignin(data))} className="flex flex-col justify-center items-center gap-y-7">
-        <FormInput placeholder="email" register={register("email")} errors={errors.email} />
-        <FormInput placeholder="senha" register={register("password")} errors={errors.password} />
+        <FormInput type="text" placeholder="email" register={register("email")} errors={errors.email} />
+        <FormInput type="password" placeholder="senha" register={register("password")} errors={errors.password} />
         <button type="submit" className="text-black text-3xl bg-orange-400 w-64 h-16 cursor-pointer">
           Entrar
         </button>
