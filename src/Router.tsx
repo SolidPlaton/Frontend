@@ -1,6 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import { useAuth } from "./hooks/useAuth";
+import Cadastro from "./pages/Cadastro";
 
 export function Router() {
     const {user} = useAuth()
@@ -12,7 +13,10 @@ export function Router() {
             {
                 !isLogged ?
                 (
-                    <Route path="/login" element={ <Login /> } />
+                    <>
+                    <Route path="/" element={ <Login /> } />
+                    <Route path="/cadastro" element={ <Cadastro /> } />
+                    </>
                 )
                 :
                 (
