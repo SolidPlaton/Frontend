@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserSchemaSignIn, UserSchemaSignInType } from "../../utils/signinValidation";
 import { FormInput } from "../../components/FormInput";
+import { FormButton } from "../../components/FormButton";
 
 
 
@@ -35,9 +36,9 @@ export default function Login() {
       <form onSubmit={handleSubmit((data) => handleSignin(data))} className="flex flex-col justify-center items-center gap-y-7">
         <FormInput type="text" placeholder="email" register={register("email")} errors={errors.email} />
         <FormInput type="password" placeholder="senha" register={register("password")} errors={errors.password} />
-        <button type="submit" className="text-black text-3xl bg-orange-400 w-64 h-16 cursor-pointer">
-          Entrar
-        </button>
+
+        <FormButton text="Entrar" />
+        
         <p className="text-zinc-200">não possui uma conta? cadastre-se</p>
       </form>
     </div>
