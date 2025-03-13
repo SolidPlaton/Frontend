@@ -6,6 +6,7 @@ import { api } from "../../api/axios";
 import { FormButton } from "../../components/FormButton";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 
 
@@ -50,7 +51,7 @@ export default function Cadastro()  {
                 
                 <FormButton text="Cadastrar" />
 
-                <p className="text-zinc-200">você tem uma conta? entre aqui</p>
+                <p className="text-zinc-200">você tem uma conta? <Link to="/" className="text-orange-400">entre aqui</Link></p>
             </form>
         </div>
     );
