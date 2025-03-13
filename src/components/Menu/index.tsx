@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import path_duotone from '../../assets/menu-icons/path-duotone.svg'
 import puzzle_piece_duotone from '../../assets/menu-icons/puzzle-piece-duotone.svg'
 import ranking_duotone from '../../assets/menu-icons/ranking-duotone.svg'
 import user_circle_duotone from '../../assets/menu-icons/user-circle-duotone.svg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 type PropsNavButton = {
   name: string,
@@ -23,6 +25,16 @@ export function NavButton({name, path_icon, to}:PropsNavButton) {
 
 
 export default function Menu() {
+
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  async function handleSignout() {
+    await auth.deslogar()
+    await navigate('/')
+  }
+
+
     return (
       <nav className="flex flex-col items-center justify-between bg-slate-900 min-w-52 h-screen pt-12 pb-5">
         <div className="flex flex-col gap-y-12 items-center">
@@ -34,7 +46,7 @@ export default function Menu() {
             <NavButton name="perfil" path_icon={user_circle_duotone} to="/perfil" />
           </div>
         </div>
-        <h2 className="text-red-500">Sair</h2>
+        <h2 onClick={handleSignout} className="text-red-500 cursor-pointer">Sair</h2>
       </nav>
     )
   }
