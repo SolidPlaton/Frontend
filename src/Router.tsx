@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import { useAuth } from "./hooks/useAuth";
 import Cadastro from "./pages/Cadastro";
+import Campanha from "./pages/Campanha";
 
 export function Router() {
     const {user} = useAuth()
@@ -20,7 +21,9 @@ export function Router() {
                 )
                 :
                 (
-                    <></>
+                    <>
+                    <Route path="/" element={ <Campanha /> } />
+                    </>
                 )
             }
         </Routes>
