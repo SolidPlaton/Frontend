@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserSchemaSignIn, UserSchemaSignInType } from "../../utils/signinValidation";
 import { FormInput } from "../../components/FormInput";
@@ -39,7 +39,7 @@ export default function Login() {
 
         <FormButton text="Entrar" />
         
-        <p className="text-zinc-200">não possui uma conta? cadastre-se</p>
+        <p className="text-zinc-200">não possui uma conta? <Link to="/cadastro" className="text-orange-400">cadastre-se</Link></p>
       </form>
     </div>
   );
