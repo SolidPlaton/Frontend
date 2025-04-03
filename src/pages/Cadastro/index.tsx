@@ -6,12 +6,13 @@ import { api } from "../../api/axios";
 import { FormButton } from "../../components/FormButton";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 export default function Cadastro()  {
     const auth = useContext(AuthContext);
+    const navigate = useNavigate();
   
     const {
       register,
@@ -29,6 +30,7 @@ export default function Cadastro()  {
 
             if (response.status === 200) {
                 auth.logar(data.email, data.senha)
+                navigate("/");
             }
         } catch (error) {
             console.error(error)
