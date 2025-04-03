@@ -31,7 +31,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-screen bg-slate-900">
+    <div className="flex flex-col justify-center items-center w-screen h-screen bg-slate-900">
       <h1 className="text-4xl font-normal text-orange-400 mb-20">Login</h1>
       <form onSubmit={handleSubmit((data) => handleSignin(data))} className="flex flex-col justify-center items-center gap-y-7">
         <FormInput type="text" placeholder="email" register={register("email")} errors={errors.email} />

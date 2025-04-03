@@ -38,7 +38,7 @@ export default function Cadastro()  {
 
   
     return (
-        <div className="flex flex-col justify-center items-center w-screen bg-slate-900">
+        <div className="flex flex-col justify-center items-center w-screen h-screen bg-slate-900">
             <h1 className="text-4xl font-normal text-orange-400 mb-20">
                 Criar Conta
             </h1>
