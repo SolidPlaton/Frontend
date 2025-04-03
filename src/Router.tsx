@@ -23,7 +23,8 @@ export function Router() {
                 :
                 (
                     <>
-                    <Route path="/" element={ <Campanha /> } />
+                    <Route index element={ <Campanha /> } />
+                    <Route path="/campanha" element={ <Campanha /> } />
                     </>
                 )
             }
