@@ -15,7 +15,8 @@ export function Router() {
                 !isLogged ?
                 (
                     <>
-                    <Route path="/" element={ <Login /> } />
+                    <Route index element={<Login />} />
+                    <Route index path="/login" element={ <Login /> } />
                     <Route path="/cadastro" element={ <Cadastro /> } />
                     </>
                 )

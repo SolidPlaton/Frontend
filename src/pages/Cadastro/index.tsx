@@ -53,7 +53,7 @@ export default function Cadastro()  {
                 
                 <FormButton text="Cadastrar" />
 
-                <p className="text-zinc-200">você tem uma conta? <Link to="/" className="text-orange-400">entre aqui</Link></p>
+                <p className="text-zinc-200">você tem uma conta? <Link to="/login" className="text-orange-400">entre aqui</Link></p>
             </form>
         </div>
     );
