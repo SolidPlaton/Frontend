@@ -19,24 +19,24 @@ export default function Campanha() {
                 <img draggable="false" src={earth} alt="earth" className="min-w-6xl max-w-6xl
                 fixed top-3"/>
 
-                <div className="absolute top-14 left-[550px]">
-                    <FaseButton img_path={meteoro} />
-                </div>
-
-                <div className="absolute top-52 left-[330px]">
-                    <FaseButton img_path={tornado} />
-                </div>
-
-                <div className="absolute top-[450px] left-[400px]">
-                    <FaseButton img_path={vulcao} />
-                </div>
-
                 <div className="absolute top-64 left-[730px]">
-                    <FaseButton img_path={terremoto} />
+                    <FaseButton img_path={terremoto} fase_id={1} />
                 </div>
 
                 <div className="absolute top-[500px] left-[650px]">
-                    <FaseButton img_path={tsunami} />
+                    <FaseButton img_path={tsunami} fase_id={2} />
+                </div>
+
+                <div className="absolute top-[450px] left-[400px]">
+                    <FaseButton img_path={vulcao} fase_id={3} />
+                </div>
+
+                <div className="absolute top-52 left-[330px]">
+                    <FaseButton img_path={tornado} fase_id={4} />
+                </div>
+
+                <div className="absolute top-14 left-[550px]">
+                    <FaseButton img_path={meteoro} fase_id={5} />
                 </div>
             </div>
         </Layout>
