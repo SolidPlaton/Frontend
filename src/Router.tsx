@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import { useAuth } from "./hooks/useAuth";
 import Cadastro from "./pages/Cadastro";
 import Campanha from "./pages/Campanha";
+import Fase from "./pages/Fase";
 
 export function Router() {
     const {user} = useAuth()
@@ -25,6 +26,7 @@ export function Router() {
                     <>
                     <Route index element={ <Campanha /> } />
                     <Route path="/campanha" element={ <Campanha /> } />
+                    <Route path="/fase/:id" element={ <Fase /> } />
                     </>
                 )
             }
