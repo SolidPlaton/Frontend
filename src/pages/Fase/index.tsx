@@ -52,12 +52,15 @@ export default function Fase() {
                         melhor pontuação: value pts
                     </p>
 
-                    <div className="bg-fuchsia-950 text-white h-12 w-48 rounded-xl cursor-pointer
-                                        flex items-center justify-center
-                                        border-2 border-black hover:border-orange-400 hover:text-orange-400">
-                        Iniciar
-                    </div>
-
+                    <Link 
+                        to={`/fase/${id}/questoes`} 
+                        state={{ questoes: fase?.questoes }}>
+                            <div className="bg-fuchsia-950 text-white h-12 w-48 rounded-xl cursor-pointer
+                                                flex items-center justify-center
+                                                border-2 border-black hover:border-orange-400 hover:text-orange-400">
+                                Iniciar
+                            </div>
+                    </Link >
                 </div>
             </div>
         </Layout>
