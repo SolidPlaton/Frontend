@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { IFase } from "../../interfaces/Fase";
 import { api } from "../../api/axios"
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 type FaseParams = {
     id: string;
@@ -10,6 +10,8 @@ type FaseParams = {
 
 export default function Fase() {
     const { id } = useParams<FaseParams>()
+    const location = useLocation();
+    const img_path = location.state?.img_path ?? "";
 
     const [fase, setFase] = useState<IFase>()
 
@@ -29,6 +31,7 @@ export default function Fase() {
     return (
         <Layout>
             <div >
+                {img_path && <img draggable="false" src={img_path} alt="Imagem da fase" />}
                 <p>{fase?.id}</p>
                 <p>{fase?.nome}</p>
                 <p>{fase?.assunto}</p>
