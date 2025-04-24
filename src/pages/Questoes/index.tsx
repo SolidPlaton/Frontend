@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
 import fechar_questoes from "/images/icons/fechar-questoes.svg"
+import DisplayQuestoes from "../../components/DisplayQuestoes";
 
 
 
@@ -42,19 +43,7 @@ export default function Questoes() {
             </div>
 
 
-
-
-
-
-            {/* Display do enunciado e das alternativas */}
-            <div>
-
-            </div>
-            
-            {/* Botão de confirmar alternativa */}
-            <div>
-
-            </div>
+            <DisplayQuestoes questoes={questoes} />
         </div>
     )
 }
