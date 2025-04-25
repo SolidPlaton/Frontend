@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect } from "react"
 import { Alternativa } from "../../interfaces/Questao"
 
 type Props = {
     alternativas: Alternativa[];
     questaoAtual: number;
-    setSelecionada: (index: number | null) => void; // Nova propriedade
+    selecionada: number | null;
+    setSelecionada: (index: number | null) => void;
 };
 
 
 
-export default function DisplayAlternativas({ alternativas, questaoAtual, setSelecionada }: Props) {
-    const [selecionada, setLocalSelecionada] = useState<number | null>(null);
+export default function DisplayAlternativas({ alternativas, questaoAtual, selecionada, setSelecionada }: Props) {
 
     useEffect(() => {
-        setLocalSelecionada(null);
         setSelecionada(null);
     }, [questaoAtual]);
 
-
+    const handleSelecionada = useCallback((index: number) => {
+        setSelecionada(index);
+    }, [setSelecionada]);
+        
 
     return (
         <>
@@ -28,8 +30,7 @@ export default function DisplayAlternativas({ alternativas, questaoAtual, setSel
                             selecionada === index ? "bg-orange-400" : "bg-white"
                         }`}
                         onClick={() => {
-                            setLocalSelecionada(index);
-                            setSelecionada(index);
+                            handleSelecionada(index);
                         }}
                     ></div>
 

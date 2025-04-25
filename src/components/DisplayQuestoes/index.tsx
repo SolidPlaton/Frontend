@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { IQuestao } from "../../interfaces/Questao"
 import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
@@ -15,6 +15,11 @@ export default function DisplayQuestoes( { questoes }:Props ) {
     const navigate = useNavigate();
     const [questaoAtual, setQuestaoAtual] = useState(0);
     const [selecionada, setSelecionada] = useState<number | null>(null);
+
+    const setHandleSelecionada = useCallback((index: number | null) => {
+        setSelecionada(index);
+    }, []);
+    
 
     function proximaQuestao() {
         if (questoes[questaoAtual + 1]) {
@@ -40,8 +45,9 @@ export default function DisplayQuestoes( { questoes }:Props ) {
                 <div className="mt-4">
                     <DisplayAlternativas 
                         alternativas={questoes[questaoAtual].alternativas} 
-                        questaoAtual={questaoAtual} 
-                        setSelecionada={setSelecionada} />
+                        questaoAtual={questaoAtual}
+                        selecionada={selecionada}
+                        setSelecionada={setHandleSelecionada} />
                 </div>
             </div>
 
