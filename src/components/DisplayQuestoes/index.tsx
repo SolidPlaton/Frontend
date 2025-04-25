@@ -36,7 +36,7 @@ export default function DisplayQuestoes( { questoes }:Props ) {
                     <img src={`${api.getUri()}${questoes[questaoAtual].imagemUrl}`} alt="Imagem da questão" />
                 </div>
                 <div className="mt-4">
-                    <DisplayAlternativas alternativas={questoes[questaoAtual].alternativas} />
+                    <DisplayAlternativas alternativas={questoes[questaoAtual].alternativas} questaoAtual={questaoAtual} />
                 </div>
                 <button className="text-white" onClick={() => proximaQuestao()}>Próxima</button>
             </div>

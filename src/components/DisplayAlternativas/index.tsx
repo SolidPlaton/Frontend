@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Alternativa } from "../../interfaces/Questao"
 
 type Props = {
     alternativas: Alternativa[]
+    questaoAtual: number
 }
 
 
-export default function DisplayAlternativas({ alternativas }: Props) {
+export default function DisplayAlternativas({ alternativas, questaoAtual }: Props) {
     const [selecionada, setSelecionada] = useState<number | null>(null);
+
+    useEffect(() => {
+        setSelecionada(null);
+    }, [questaoAtual]);
+
 
     return (
         <>
