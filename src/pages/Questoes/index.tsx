@@ -33,12 +33,12 @@ export default function Questoes() {
 
                         <FecharButton />
 
-                        <div>
-                            <ProgressoQuestoes resultadoQuestoes={resultadoQuestoes} />
-                        </div>
+                        <ProgressoQuestoes resultadoQuestoes={resultadoQuestoes} />
+                        
                         <div className="text-white text-3xl">
                             0:31
                         </div>
+                        
                     </div>
                 </div>
                 <DisplayQuestoes questoes={questoes} />
