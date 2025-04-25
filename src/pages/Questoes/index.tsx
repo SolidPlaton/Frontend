@@ -27,23 +27,23 @@ export default function Questoes() {
 
 
     return (
-        <div className="bg-[url('/images/universo.jpg')] w-full h-full overflow-hidden">
-            <div className="w-full flex justify-center">
-                <div className="w-2xl h-32 flex flex-row justify-between items-center">
-                    <div onClick={() => navigate("/campanha")} className="w-60px h-60px bg-pink-700 cursor-pointer">
-                        <img src={fechar_questoes} alt="fechar questão" />
-                    </div>
-                    <div>
-                        <ProgressoQuestoes resultadoQuestoes={resultadoQuestoes} />
-                    </div>
-                    <div className="text-white text-3xl">
-                        0:31
+        <div className="bg-[url('/images/universo.jpg')] w-full h-full overflow-hidden flex justify-center">
+            <div className="max-w-2xl min-w-2xl">
+                <div className="w-full flex justify-center">
+                    <div className="w-full h-32 flex flex-row justify-between items-center">
+                        <div onClick={() => navigate("/campanha")} className="w-60px h-60px bg-pink-700 cursor-pointer">
+                            <img src={fechar_questoes} alt="fechar questão" />
+                        </div>
+                        <div>
+                            <ProgressoQuestoes resultadoQuestoes={resultadoQuestoes} />
+                        </div>
+                        <div className="text-white text-3xl">
+                            0:31
+                        </div>
                     </div>
                 </div>
+                <DisplayQuestoes questoes={questoes} />
             </div>
-
-
-            <DisplayQuestoes questoes={questoes} />
         </div>
     )
 }
