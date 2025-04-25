@@ -2,17 +2,21 @@ import { useEffect, useState } from "react"
 import { Alternativa } from "../../interfaces/Questao"
 
 type Props = {
-    alternativas: Alternativa[]
-    questaoAtual: number
-}
+    alternativas: Alternativa[];
+    questaoAtual: number;
+    setSelecionada: (index: number | null) => void; // Nova propriedade
+};
 
 
-export default function DisplayAlternativas({ alternativas, questaoAtual }: Props) {
-    const [selecionada, setSelecionada] = useState<number | null>(null);
+
+export default function DisplayAlternativas({ alternativas, questaoAtual, setSelecionada }: Props) {
+    const [selecionada, setLocalSelecionada] = useState<number | null>(null);
 
     useEffect(() => {
+        setLocalSelecionada(null);
         setSelecionada(null);
     }, [questaoAtual]);
+
 
 
     return (
@@ -23,7 +27,10 @@ export default function DisplayAlternativas({ alternativas, questaoAtual }: Prop
                         className={`w-4 h-4 rounded-full cursor-pointer ${
                             selecionada === index ? "bg-orange-400" : "bg-white"
                         }`}
-                        onClick={() => setSelecionada(index)}
+                        onClick={() => {
+                            setLocalSelecionada(index);
+                            setSelecionada(index);
+                        }}
                     ></div>
 
                     <div className="text-white">{alternativa.texto}</div>
