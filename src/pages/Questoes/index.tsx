@@ -1,16 +1,15 @@
 import { IQuestao } from "../../interfaces/Questao"
 import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
-import fechar_questoes from "/images/icons/fechar-questoes.svg"
 import DisplayQuestoes from "../../components/DisplayQuestoes";
+import FecharButton from "../../components/FecharButton";
 
 
 
 
 export default function Questoes() {
 
-    const navigate = useNavigate();
     const location = useLocation();
     const questoes: IQuestao[] = location.state?.questoes || [];
 
@@ -31,9 +30,9 @@ export default function Questoes() {
             <div className="max-w-2xl min-w-2xl">
                 <div className="w-full flex justify-center">
                     <div className="w-full h-32 flex flex-row justify-between items-center">
-                        <div onClick={() => navigate("/campanha")} className="w-60px h-60px bg-pink-700 cursor-pointer">
-                            <img src={fechar_questoes} alt="fechar questão" />
-                        </div>
+
+                        <FecharButton />
+
                         <div>
                             <ProgressoQuestoes resultadoQuestoes={resultadoQuestoes} />
                         </div>
