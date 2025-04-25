@@ -3,6 +3,7 @@ import { IQuestao } from "../../interfaces/Questao"
 import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
 import DisplayAlternativas from "../DisplayAlternativas"
+import ConfirmarButton from "../ConfirmarButton"
 
 
 type Props = {
@@ -52,16 +53,7 @@ export default function DisplayQuestoes( { questoes }:Props ) {
                 </div>
             </div>
 
-            <div
-                className={`flex justify-center items-center text-black select-none h-12 w-2xs text-xl ${
-                                selecionada === null 
-                                ? "opacity-50 bg-gray-400" 
-                                : "cursor-pointer bg-orange-400 hover:bg-orange-600 duration-200 ease-out"
-                            }`}
-                onClick={() => selecionada !== null && proximaQuestao()}
-            >
-                confirmar
-            </div>
+            <ConfirmarButton selecionada={selecionada !== null} proxima={proximaQuestao} />
         
         </div>
     )
