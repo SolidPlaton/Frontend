@@ -31,7 +31,7 @@ export default function DisplayQuestoes() {
                 </div>
             </div>
 
-            <ConfirmarButton selecionada={selecionada !== null} />
+            <ConfirmarButton selecionada={selecionada} />
         
         </div>
     )
