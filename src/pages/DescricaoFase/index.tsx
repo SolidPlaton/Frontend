@@ -10,7 +10,7 @@ type FaseParams = {
     id: string;
 };
 
-export default function Fase() {
+export default function DescricaoFase() {
     const { id } = useParams<FaseParams>()
     const location = useLocation();
     const img_path = location.state?.img_path ?? "";
