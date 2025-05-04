@@ -1,17 +1,14 @@
-import { useCallback, useState } from "react"
-import { IQuestao } from "../../interfaces/Questao"
+import { useCallback, useContext, useState } from "react"
 import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
 import DisplayAlternativas from "../DisplayAlternativas"
 import ConfirmarButton from "../ConfirmarButton"
+import { FaseContext } from "../../context/FaseContext"
 
 
-type Props = {
-    questoes: IQuestao[]
-}
+export default function DisplayQuestoes() {
 
-
-export default function DisplayQuestoes( { questoes }:Props ) {
+    const { questoes } = useContext(FaseContext);
 
     const navigate = useNavigate();
     const [questaoAtual, setQuestaoAtual] = useState(0);
