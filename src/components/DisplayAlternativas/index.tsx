@@ -1,16 +1,17 @@
-import { useCallback, useEffect } from "react"
-import { Alternativa } from "../../interfaces/Questao"
+import { useCallback, useContext, useEffect } from "react"
+import { FaseContext } from "../../context/FaseContext";
 
 type Props = {
-    alternativas: Alternativa[];
-    questaoAtual: number;
     selecionada: number | null;
     setSelecionada: (index: number | null) => void;
 };
 
 
 
-export default function DisplayAlternativas({ alternativas, questaoAtual, selecionada, setSelecionada }: Props) {
+export default function DisplayAlternativas({ selecionada, setSelecionada }: Props) {
+
+    const { questaoAtual } = useContext(FaseContext);
+    const alternativas = questaoAtual.alternativas;
 
     useEffect(() => {
         setSelecionada(null);
