@@ -8,7 +8,7 @@ import FecharButton from "../../components/FecharButton";
 
 
 
-export default function Questoes() {
+export default function Fase() {
 
     const location = useLocation();
     const questoes: IQuestao[] = location.state?.questoes || [];
