@@ -3,11 +3,17 @@ import { IQuestao } from "../interfaces/Questao";
 import { createContext, useState } from "react";
 
 
+type resultadoQuestao = {
+    estaCorreta: boolean
+    tempoUtilizado: number
+}
+
 interface IFaseContext {
     questoes: IQuestao[]
-    resultadoQuestoes: (null | boolean)[]
+    resultadoQuestoes: (resultadoQuestao | null)[]
     questaoAtual: IQuestao
     proximaQuestao: () => void
+    corrigirAlternativa: (selecionada:number) => void
 }
 
 export const FaseContext = createContext({} as IFaseContext)
@@ -28,7 +34,25 @@ export default function FaseContextProvider({children}:Props) {
     const [indiceQuestao, setIndiceQuestao] = useState(0);
     const questaoAtual = questoes[indiceQuestao] || null;
 
-    const [resultadoQuestoes, setResultadoQuestoes] = useState<(null | boolean)[]>(Array(questoes.length).fill(null));
+    const [resultadoQuestoes, setResultadoQuestoes] = useState<(resultadoQuestao | null)[]>(Array(questoes.length).fill(null));
+
+
+    function corrigirAlternativa(selecionada:number) {
+        const estaCorreta = selecionada === questaoAtual.alternativaCorreta
+
+        const tempoUtilizado = 300
+        atualizarResultados({estaCorreta, tempoUtilizado})
+    }
+
+    function atualizarResultados({ estaCorreta, tempoUtilizado }: resultadoQuestao) {
+        setResultadoQuestoes(prev => {
+            const novosResultados = [...prev];
+            novosResultados[indiceQuestao] = { estaCorreta, tempoUtilizado };
+            console.log(novosResultados)
+            return novosResultados;
+        });
+    }
+    
 
 
     function proximaQuestao() {
@@ -45,7 +69,7 @@ export default function FaseContextProvider({children}:Props) {
 
 
     return (
-        <FaseContext.Provider value={{questoes, resultadoQuestoes, questaoAtual, proximaQuestao}}>
+        <FaseContext.Provider value={{questoes, resultadoQuestoes, questaoAtual, proximaQuestao, corrigirAlternativa}}>
             {children}
         </FaseContext.Provider>
     )
