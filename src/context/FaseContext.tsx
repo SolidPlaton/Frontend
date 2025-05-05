@@ -11,6 +11,7 @@ type resultadoQuestao = {
 interface IFaseContext {
     questoes: IQuestao[]
     resultadoQuestoes: (resultadoQuestao | null)[]
+    indiceQuestao: number
     questaoAtual: IQuestao
     proximaQuestao: () => void
     corrigirAlternativa: (selecionada:number) => void
@@ -69,7 +70,7 @@ export default function FaseContextProvider({children}:Props) {
 
 
     return (
-        <FaseContext.Provider value={{questoes, resultadoQuestoes, questaoAtual, proximaQuestao, corrigirAlternativa}}>
+        <FaseContext.Provider value={{questoes, resultadoQuestoes, indiceQuestao, questaoAtual, proximaQuestao, corrigirAlternativa}}>
             {children}
         </FaseContext.Provider>
     )
