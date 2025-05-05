@@ -14,7 +14,7 @@ export function ProgressoQuestoes() {
                 <div
                     key={index}
                     className={`w-6 h-6 rounded-full ${
-                        status === null ? "bg-gray-500" : status ? "bg-green-500" : "bg-red-500"
+                        status === null ? "bg-gray-500" : status.estaCorreta ? "bg-green-500" : "bg-red-500"
                     }`}
                 ></div>
             ))}
