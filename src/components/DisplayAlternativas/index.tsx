@@ -10,7 +10,7 @@ type Props = {
 
 export default function DisplayAlternativas({ selecionada, setSelecionada }: Props) {
 
-    const { questaoAtual } = useContext(FaseContext);
+    const { questaoAtual, resultadoQuestoes, indiceQuestao } = useContext(FaseContext);
     const alternativas = questaoAtual.alternativas;
 
     useEffect(() => {
@@ -31,7 +31,9 @@ export default function DisplayAlternativas({ selecionada, setSelecionada }: Pro
                             selecionada === index ? "bg-orange-400" : "bg-white"
                         }`}
                         onClick={() => {
-                            handleSelecionada(index);
+                            if (resultadoQuestoes[indiceQuestao] === null) {
+                                handleSelecionada(index);
+                            }
                         }}
                     ></div>
 
