@@ -17,27 +17,27 @@ export default function DisplayAlternativas({ selecionada, setSelecionada }: Pro
         setSelecionada(null);
     }, [questaoAtual]);
 
-    const handleSelecionada = useCallback((index: number) => {
-        setSelecionada(index);
+    const handleSelecionada = useCallback((numeroAlternativa: number) => {
+        setSelecionada(numeroAlternativa);
     }, [setSelecionada]);
         
 
     return (
         <>
-            {alternativas.map((alternativa, index) => (
-                <div key={index} className="flex flex-row items-center gap-x-2.5 h-12">
+            {alternativas.map(({numero, texto}) => (
+                <div key={numero} className="flex flex-row items-center gap-x-2.5 h-12">
                     <div
                         className={`w-4 h-4 rounded-full cursor-pointer hover:outline-2 hover:outline-amber-600 ${
-                            selecionada === index ? "bg-orange-400" : "bg-white"
+                            selecionada === numero ? "bg-orange-400" : "bg-white"
                         }`}
                         onClick={() => {
                             if (resultadoQuestoes[indiceQuestao] === null) {
-                                handleSelecionada(index);
+                                handleSelecionada(numero);
                             }
                         }}
                     ></div>
 
-                    <div className="text-white">{alternativa.texto}</div>
+                    <div className="text-white">{texto}</div>
                 </div>
             ))}
         </>
