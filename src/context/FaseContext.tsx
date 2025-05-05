@@ -49,7 +49,6 @@ export default function FaseContextProvider({children}:Props) {
         setResultadoQuestoes(prev => {
             const novosResultados = [...prev];
             novosResultados[indiceQuestao] = { estaCorreta, tempoUtilizado };
-            console.log(novosResultados)
             return novosResultados;
         });
     }
