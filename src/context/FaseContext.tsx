@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { IQuestao } from "../interfaces/Questao";
 import { createContext, useState } from "react";
+import EstadoQuestaoAtual from "../enums/EstadoQuestaoAtual";
 
 
 type resultadoQuestao = {
@@ -13,6 +14,7 @@ interface IFaseContext {
     resultadoQuestoes: (resultadoQuestao | null)[]
     indiceQuestao: number
     questaoAtual: IQuestao
+    estadoQuestaoAtual: EstadoQuestaoAtual
     proximaQuestao: () => void
     corrigirAlternativa: (selecionada:number) => void
 }
@@ -35,6 +37,9 @@ export default function FaseContextProvider({children}:Props) {
     const [indiceQuestao, setIndiceQuestao] = useState(0);
     const questaoAtual = questoes[indiceQuestao] || null;
 
+    const [estadoQuestaoAtual, setEstadoQuestaoAtual] = useState(EstadoQuestaoAtual.Respondendo)
+
+
     const [resultadoQuestoes, setResultadoQuestoes] = useState<(resultadoQuestao | null)[]>(Array(questoes.length).fill(null));
 
 
@@ -43,6 +48,7 @@ export default function FaseContextProvider({children}:Props) {
 
         const tempoUtilizado = 300
         atualizarResultados({estaCorreta, tempoUtilizado})
+        setEstadoQuestaoAtual(EstadoQuestaoAtual.Confirmada)
     }
 
     function atualizarResultados({ estaCorreta, tempoUtilizado }: resultadoQuestao) {
@@ -58,6 +64,7 @@ export default function FaseContextProvider({children}:Props) {
     function proximaQuestao() {
         setIndiceQuestao(prevIndice => {
             if (prevIndice < questoes.length - 1) {
+                setEstadoQuestaoAtual(EstadoQuestaoAtual.Respondendo)
                 return prevIndice + 1;
             } else {
                 navigate('/campanha');
@@ -69,7 +76,7 @@ export default function FaseContextProvider({children}:Props) {
 
 
     return (
-        <FaseContext.Provider value={{questoes, resultadoQuestoes, indiceQuestao, questaoAtual, proximaQuestao, corrigirAlternativa}}>
+        <FaseContext.Provider value={{questoes, resultadoQuestoes, indiceQuestao, questaoAtual, estadoQuestaoAtual, proximaQuestao, corrigirAlternativa}}>
             {children}
         </FaseContext.Provider>
     )

@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect } from "react"
 import { FaseContext } from "../../context/FaseContext";
+import EstadoQuestaoAtual from "../../enums/EstadoQuestaoAtual";
 
 type Props = {
     selecionada: number | null;
@@ -10,7 +11,7 @@ type Props = {
 
 export default function DisplayAlternativas({ selecionada, setSelecionada }: Props) {
 
-    const { questaoAtual, resultadoQuestoes, indiceQuestao } = useContext(FaseContext);
+    const { questaoAtual, estadoQuestaoAtual } = useContext(FaseContext);
     const alternativas = questaoAtual.alternativas;
 
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function DisplayAlternativas({ selecionada, setSelecionada }: Pro
                             selecionada === numero ? "bg-orange-400" : "bg-white"
                         }`}
                         onClick={() => {
-                            if (resultadoQuestoes[indiceQuestao] === null) {
+                            if (estadoQuestaoAtual === EstadoQuestaoAtual.Respondendo) {
                                 handleSelecionada(numero);
                             }
                         }}
