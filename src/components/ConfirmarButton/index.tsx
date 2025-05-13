@@ -1,23 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { FaseContext } from "../../context/FaseContext";
 
 type Props = {
     selecionada: number | null;
-    callback: () => void
+    callback: () => void,
+    proxima: () => void
 };
 
-export default function ConfirmarButton({ selecionada, callback }: Props) {
-    const { proximaQuestao } = useContext(FaseContext);
-    
-    const [botaoTexto, setBotaoTexto] = useState("Confirmar");
+export default function ConfirmarButton({ selecionada, callback, proxima }: Props) {
+    const { faseState } = useContext(FaseContext);
+
+    const respostaQuestaoAtual = faseState.respostas[faseState.questaoAtualIndex]
+
+    const botaoTexto = respostaQuestaoAtual !== null ? "Próxima" : "Confirmar";
 
     const handleClick = () => {
         if (botaoTexto === "Confirmar" && selecionada !== null) {
             callback()
-            setBotaoTexto("Próxima");
         } else if (botaoTexto === "Próxima") {
-            proximaQuestao();
-            setBotaoTexto("Confirmar"); 
+           proxima();
         }
     };
 

@@ -9,13 +9,14 @@ import { ProgressoQuestoes } from "../ProgressoQuestoes"
 import Timer from "../Timer"
 import EnunciadoQuestaoAtual from "../EnunciadoQuestaoAtual"
 import { IResposta } from "../../interfaces/Fase"
+import useTimer from "../../hooks/useTimer"
 
 
 export default function DisplayQuestoes() {
 
-    const { faseState, corrigirAlternativa } = useContext(FaseContext);
+    const { faseState, corrigirAlternativa, proximaQuestao } = useContext(FaseContext);
 
-    
+    const { timeLeft, pauseTimer, resetTimer } = useTimer(15, enviarResposta);
     const [selecionada, setSelecionada] = useState<number | null>(null);
 
     const setHandleSelecionada = useCallback((index: number | null) => {
@@ -24,6 +25,7 @@ export default function DisplayQuestoes() {
 
 
     function enviarResposta() {
+        pauseTimer()
         
         const resposta:IResposta = {
             questionId: faseState.questaoAtualIndex,
@@ -32,6 +34,11 @@ export default function DisplayQuestoes() {
         }
 
         corrigirAlternativa(resposta)
+    }
+
+    function handleProximaQuestao() {
+        proximaQuestao()
+        resetTimer()
     }
 
     
@@ -43,7 +50,7 @@ export default function DisplayQuestoes() {
 
                     <ProgressoQuestoes />
 
-                    {/* <Timer /> */}
+                    <Timer timeLeft={timeLeft} />
                 </div>
 
                 <EstiloQuestao>
@@ -59,7 +66,8 @@ export default function DisplayQuestoes() {
 
                 <ConfirmarButton 
                     selecionada={selecionada} 
-                    callback={enviarResposta} />
+                    callback={enviarResposta}
+                    proxima={handleProximaQuestao} />
 
         </BackgroundQuestao>
     )
