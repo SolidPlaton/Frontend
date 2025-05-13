@@ -6,11 +6,13 @@ import { FaseContext } from "../../context/FaseContext";
 
 export function ProgressoQuestoes() {
 
-    const { resultadoQuestoes } = useContext(FaseContext);
+    const { faseState } = useContext(FaseContext);
+
+    const respostas = faseState.respostas
 
     return (
         <div className="flex gap-2 justify-center my-4">
-            {resultadoQuestoes.map((status, index) => (
+            {respostas.map((status, index) => (
                 <div
                     key={index}
                     className={`w-6 h-6 rounded-full ${
