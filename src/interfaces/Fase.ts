@@ -6,3 +6,18 @@ export interface IFase {
     id?: number
     questoes?: IQuestao[]
 }
+
+
+export interface IFaseState {
+  questaoAtualIndex: number;
+  respostas: IResposta[];
+  tempoInicial: number;
+}
+
+
+export interface IResposta {
+  questionId: number;
+  alternativaSelecionada: number | null; // null caso o tempo acabe sem resposta
+  tempoGasto: number;
+  estaCorreta?: boolean;
+}
