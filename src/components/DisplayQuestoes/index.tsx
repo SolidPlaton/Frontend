@@ -1,13 +1,19 @@
 import { useCallback, useContext, useState } from "react"
-import { api } from "../../api/axios"
 import DisplayAlternativas from "../DisplayAlternativas"
 import ConfirmarButton from "../ConfirmarButton"
 import { FaseContext } from "../../context/FaseContext"
+import BackgroundQuestao from "./BackgroundQuestao"
+import EstiloQuestao from "./EstiloQuestao"
+import FecharButton from "../FecharButton"
+import { ProgressoQuestoes } from "../ProgressoQuestoes"
+import Timer from "../Timer"
+import EnunciadoQuestaoAtual from "../EnunciadoQuestaoAtual"
+import { IResposta } from "../../interfaces/Fase"
 
 
 export default function DisplayQuestoes() {
 
-    const { questaoAtual } = useContext(FaseContext);
+    const { faseState, corrigirAlternativa } = useContext(FaseContext);
 
     
     const [selecionada, setSelecionada] = useState<number | null>(null);
@@ -16,23 +22,45 @@ export default function DisplayQuestoes() {
         setSelecionada(index);
     }, []);
 
+
+    function enviarResposta() {
+        
+        const resposta:IResposta = {
+            questionId: faseState.questaoAtualIndex,
+            alternativaSelecionada: selecionada,
+            tempoGasto: 300,
+        }
+
+        corrigirAlternativa(resposta)
+    }
+
     
     return (
-        <div className="w-full flex flex-col items-center pb-16"> 
-            <div className="bg-fuchsia-950 px-8 py-6 mb-24 w-full">
-                <div>
-                    <img className="w-full" src={`${api.getUri()}${questaoAtual.imagemUrl}`} alt="Imagem da questão" />
+        <BackgroundQuestao >
+            
+                <div className="w-full flex flex-row justify-between items-center">
+                    <FecharButton />
+
+                    <ProgressoQuestoes />
+
+                    {/* <Timer /> */}
                 </div>
-                
-                <div className="mt-4">
+
+                <EstiloQuestao>
+                    
+                    <EnunciadoQuestaoAtual />
+                    
+                    
                     <DisplayAlternativas 
                         selecionada={selecionada}
                         setSelecionada={setHandleSelecionada} />
-                </div>
-            </div>
-
-            <ConfirmarButton selecionada={selecionada} />
         
-        </div>
+                </EstiloQuestao>
+
+                <ConfirmarButton 
+                    selecionada={selecionada} 
+                    callback={enviarResposta} />
+
+        </BackgroundQuestao>
     )
 }
