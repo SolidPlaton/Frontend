@@ -1,22 +1,15 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { IQuestao } from "../interfaces/Questao";
 import { createContext, useState } from "react";
-import EstadoQuestaoAtual from "../enums/EstadoQuestaoAtual";
+import { IFaseState, IResposta } from "../interfaces/Fase";
 
 
-type resultadoQuestao = {
-    estaCorreta: boolean
-    tempoUtilizado: number
-}
 
 interface IFaseContext {
     questoes: IQuestao[]
-    resultadoQuestoes: (resultadoQuestao | null)[]
-    indiceQuestao: number
-    questaoAtual: IQuestao
-    estadoQuestaoAtual: EstadoQuestaoAtual
+    faseState: IFaseState
     proximaQuestao: () => void
-    corrigirAlternativa: (selecionada:number) => void
+    corrigirAlternativa: (resposta: IResposta) => void
 }
 
 export const FaseContext = createContext({} as IFaseContext)
@@ -29,54 +22,43 @@ type Props = {
 
 export default function FaseContextProvider({children}:Props) {
 
-    const navigate = useNavigate();
     const location = useLocation();
     
     const questoes: IQuestao[] = location.state?.questoes || [];
 
-    const [indiceQuestao, setIndiceQuestao] = useState(0);
-    const questaoAtual = questoes[indiceQuestao] || null;
+    const defaultState: IFaseState = {
+        questaoAtualIndex: 0,
+        respostas: Array(questoes.length).fill(null),
+        tempoInicial: 10
+    };
 
-    const [estadoQuestaoAtual, setEstadoQuestaoAtual] = useState(EstadoQuestaoAtual.Respondendo)
+    const [faseState, setFaseState] = useState<IFaseState>(defaultState);
 
 
-    const [resultadoQuestoes, setResultadoQuestoes] = useState<(resultadoQuestao | null)[]>(Array(questoes.length).fill(null));
 
+    function corrigirAlternativa(resposta: IResposta) {
+        const questaoAtual = questoes[faseState.questaoAtualIndex]
+        resposta.estaCorreta = resposta.alternativaSelecionada === questaoAtual.alternativaCorreta
 
-    function corrigirAlternativa(selecionada:number) {
-        const estaCorreta = selecionada === questaoAtual.alternativaCorreta
+        setFaseState(prevState => {
+            const copiaRespostas = [...prevState.respostas]
+            copiaRespostas[prevState.questaoAtualIndex] = resposta
 
-        const tempoUtilizado = 300
-        atualizarResultados({estaCorreta, tempoUtilizado})
-        setEstadoQuestaoAtual(EstadoQuestaoAtual.Confirmada)
-    }
-
-    function atualizarResultados({ estaCorreta, tempoUtilizado }: resultadoQuestao) {
-        setResultadoQuestoes(prev => {
-            const novosResultados = [...prev];
-            novosResultados[indiceQuestao] = { estaCorreta, tempoUtilizado };
-            return novosResultados;
+            return { ...prevState, respostas: copiaRespostas }
         });
-    }
-    
+    };
 
 
     function proximaQuestao() {
-        setIndiceQuestao(prevIndice => {
-            if (prevIndice < questoes.length - 1) {
-                setEstadoQuestaoAtual(EstadoQuestaoAtual.Respondendo)
-                return prevIndice + 1;
-            } else {
-                navigate('/campanha');
-                return prevIndice;
-            }
-        });
+        setFaseState(prevState => ({
+            ...prevState,
+            questaoAtualIndex: prevState.questaoAtualIndex + 1
+        }))
     }
     
 
-
     return (
-        <FaseContext.Provider value={{questoes, resultadoQuestoes, indiceQuestao, questaoAtual, estadoQuestaoAtual, proximaQuestao, corrigirAlternativa}}>
+        <FaseContext.Provider value={{questoes, faseState, proximaQuestao, corrigirAlternativa}}>
             {children}
         </FaseContext.Provider>
     )
