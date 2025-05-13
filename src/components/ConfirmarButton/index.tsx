@@ -3,16 +3,17 @@ import { FaseContext } from "../../context/FaseContext";
 
 type Props = {
     selecionada: number | null;
+    callback: () => void
 };
 
-export default function ConfirmarButton({ selecionada }: Props) {
-    const { proximaQuestao, corrigirAlternativa } = useContext(FaseContext);
+export default function ConfirmarButton({ selecionada, callback }: Props) {
+    const { proximaQuestao } = useContext(FaseContext);
     
     const [botaoTexto, setBotaoTexto] = useState("Confirmar");
 
     const handleClick = () => {
         if (botaoTexto === "Confirmar" && selecionada !== null) {
-            corrigirAlternativa(selecionada);
+            callback()
             setBotaoTexto("Próxima");
         } else if (botaoTexto === "Próxima") {
             proximaQuestao();
