@@ -18,6 +18,6 @@ export interface IFaseState {
 export interface IResposta {
   questionId: number;
   alternativaSelecionada: number | null; // null caso o tempo acabe sem resposta
-  tempoGasto: number;
+  tempoRestante: number;
   estaCorreta?: boolean;
 }

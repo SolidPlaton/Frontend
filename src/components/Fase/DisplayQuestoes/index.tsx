@@ -30,7 +30,7 @@ export default function DisplayQuestoes() {
         const resposta:IResposta = {
             questionId: faseState.questaoAtualIndex,
             alternativaSelecionada: selecionada,
-            tempoGasto: 300,
+            tempoRestante: timeLeft,
         }
 
         corrigirAlternativa(resposta)
