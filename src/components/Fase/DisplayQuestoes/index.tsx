@@ -45,7 +45,7 @@ export default function DisplayQuestoes() {
     return (
         <BackgroundQuestao >
             
-                <div className="w-full flex flex-row justify-between items-center">
+                <div className="w-full flex flex-row justify-between items-center sticky top-0 bg-zinc-900/95">
                     <FecharButton />
 
                     <ProgressoQuestoes />
