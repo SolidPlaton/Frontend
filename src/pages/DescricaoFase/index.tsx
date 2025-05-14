@@ -4,7 +4,7 @@ import { IFase } from "../../interfaces/Fase";
 import { api } from "../../api/axios"
 import { Link, useLocation, useParams } from "react-router-dom";
 
-import caret_left from "../../../public/images/icons/caret-left.svg"
+import caret_left from "/images/icons/caret-left.svg"
 
 type FaseParams = {
     id: string;
