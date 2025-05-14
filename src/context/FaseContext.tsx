@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IQuestao } from "../interfaces/Questao";
 import { createContext, useState } from "react";
 import { IFaseState, IResposta } from "../interfaces/Fase";
@@ -21,6 +21,8 @@ type Props = {
 }
 
 export default function FaseContextProvider({children}:Props) {
+
+    const navigate = useNavigate();
 
     const location = useLocation();
     
@@ -50,10 +52,18 @@ export default function FaseContextProvider({children}:Props) {
 
 
     function proximaQuestao() {
-        setFaseState(prevState => ({
-            ...prevState,
-            questaoAtualIndex: prevState.questaoAtualIndex + 1
-        }))
+
+        const novoState = {
+            ...faseState,
+            questaoAtualIndex: faseState.questaoAtualIndex + 1
+        };
+
+        if (novoState.questaoAtualIndex >= questoes.length) {
+            navigate('/resultados', {state: {respostas: novoState.respostas}});
+            return
+        }
+
+        setFaseState(novoState);
     }
     
 
