@@ -1,4 +1,4 @@
-import DisplayQuestoes from "../../components/DisplayQuestoes";
+import DisplayQuestoes from "../../components/Fase/DisplayQuestoes";
 import FaseContextProvider from "../../context/FaseContext";
 
 

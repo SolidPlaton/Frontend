@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaseContext } from "../../context/FaseContext";
+import { FaseContext } from "../../../context/FaseContext";
 
 
 

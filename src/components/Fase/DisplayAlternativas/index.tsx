@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { FaseContext } from "../../context/FaseContext";
+import { FaseContext } from "../../../context/FaseContext";
 
 type Props = {
     selecionada: number | null;

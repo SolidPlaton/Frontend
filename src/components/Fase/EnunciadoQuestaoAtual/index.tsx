@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import {FaseContext} from "../../context/FaseContext";
-import { api } from "../../api/axios"
+import {FaseContext} from "../../../context/FaseContext";
+import { api } from "../../../api/axios"
 
 
 
