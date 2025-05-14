@@ -16,7 +16,7 @@ export default function DisplayQuestoes() {
 
     const { faseState, corrigirAlternativa, proximaQuestao } = useContext(FaseContext);
 
-    const { timeLeft, pauseTimer, resetTimer } = useTimer(15, enviarResposta);
+    const { timeLeft, pauseTimer, resetTimer } = useTimer(faseState.tempoInicial, enviarResposta);
     const [selecionada, setSelecionada] = useState<number | null>(null);
 
     const setHandleSelecionada = useCallback((index: number | null) => {

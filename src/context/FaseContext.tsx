@@ -29,7 +29,7 @@ export default function FaseContextProvider({children}:Props) {
     const defaultState: IFaseState = {
         questaoAtualIndex: 0,
         respostas: Array(questoes.length).fill(null),
-        tempoInicial: 10
+        tempoInicial: 300
     };
 
     const [faseState, setFaseState] = useState<IFaseState>(defaultState);
