@@ -5,6 +5,10 @@ export const scoreCalculation = (valorBase: number, initialTime: number, respost
   let estrelas = 0;
   let pontuacaoTotal = 0;
 
+  const tresMinutos   = 180;
+  const quatroMinutos = 240;
+  const cincoMinutos  = 300;
+
   respostas.forEach((resposta) => {
     const tempoGasto = initialTime - resposta.tempoRestante
 
@@ -12,12 +16,12 @@ export const scoreCalculation = (valorBase: number, initialTime: number, respost
       estrelas += 1;
       pontuacaoTotal += valorBase;
 
-      if (tempoGasto < 180) {
-        pontuacaoTotal += 300;
-      } else if (tempoGasto < 240) {
-        pontuacaoTotal += 150;
-      } else if (tempoGasto < 300) {
-        pontuacaoTotal += 50;
+      if (tempoGasto < tresMinutos) {
+        pontuacaoTotal += 400;
+      } else if (tempoGasto < quatroMinutos) {
+        pontuacaoTotal += 200;
+      } else if (tempoGasto < cincoMinutos) {
+        pontuacaoTotal += 100;
       }
 
     } else {
