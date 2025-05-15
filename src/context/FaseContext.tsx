@@ -59,7 +59,9 @@ export default function FaseContextProvider({children}:Props) {
         };
 
         if (novoState.questaoAtualIndex >= questoes.length) {
-            navigate('/resultados', {state: {respostas: novoState.respostas}});
+            navigate('/fase/resultado', {state: {
+                respostas: novoState.respostas, 
+                initialTime: faseState.tempoInicial}});
             return
         }
 
