@@ -35,10 +35,24 @@ export default function Resultado() {
 
 
     return (
-        <div>
-            <p>{ `${estrelas} estrelas` }</p>
-            <p>{ faseConcluida ? "concluida!" : "Não concluida" }</p>
-            <p>{ `${pontuacaoTotal} pontos!` }</p>
+        <div className="bg-[url('/images/universo.jpg')] w-screen h-screen overflow-clip flex flex-col justify-center items-center gap-y-60">
+            <p className="text-white">recompensas</p>
+            <p className="text-white">{ faseConcluida ? "concluida!" : "Não concluida" }</p>
+            <ProximoButton />
+        </div>
+    )
+}
+
+
+
+function ProximoButton() {
+
+    const navigate = useNavigate();
+
+    return (
+        <div className="w-48 h-10 bg-orange-400 flex justify-center items-center cursor-pointer select-none"
+             onClick={() => navigate('/campanha')}>
+            próxima
         </div>
     )
 }
