@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IResposta } from "../../interfaces/Fase";
 import { scoreCalculation } from "../../utils/scoreCalculation";
 import { useEffect, useState } from "react";
+import ProximoButton from "../../components/Resultado/ProximoButton";
+import DisplayRecompensas from "../../components/Resultado/DisplayRecompensas";
 
 
 
@@ -35,24 +37,16 @@ export default function Resultado() {
 
 
     return (
-        <div className="bg-[url('/images/universo.jpg')] w-screen h-screen overflow-clip flex flex-col justify-center items-center gap-y-60">
-            <p className="text-white">recompensas</p>
-            <p className="text-white">{ faseConcluida ? "concluida!" : "Não concluida" }</p>
+        <div className="bg-[url('/images/universo.jpg')] w-screen h-screen overflow-clip flex flex-col justify-around items-center">
+            <p className="text-white select-none">recompensas</p>
+
+            <DisplayRecompensas 
+                estrelas={estrelas} 
+                faseConcluida={faseConcluida} 
+                pontuacaoTotal={pontuacaoTotal} />
+
             <ProximoButton />
         </div>
     )
 }
 
-
-
-function ProximoButton() {
-
-    const navigate = useNavigate();
-
-    return (
-        <div className="w-48 h-10 bg-orange-400 flex justify-center items-center cursor-pointer select-none"
-             onClick={() => navigate('/campanha')}>
-            próxima
-        </div>
-    )
-}
