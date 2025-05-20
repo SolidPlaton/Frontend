@@ -4,15 +4,18 @@ import { Router } from "./Router"
 
 import './App.css'
 import { AuthProvider } from './context/AuthContext';
+import { DialogosContextProvider } from './context/Dialogos';
 
 
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-          <Router />
-      </BrowserRouter>
+      <DialogosContextProvider>
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>
+      </DialogosContextProvider>
     </AuthProvider>
   );
 }
