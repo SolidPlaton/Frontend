@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SetaAmarela from "../SetaAmarela";
 
 type Props = {
     text: string[]
@@ -44,6 +45,10 @@ export default function CaixaDialogo({ text, onClose }:Props) {
                 <div>
                     <img src="/images/platao/platao-removebg-preview.png" alt="Platão" 
                         className="w-80" />
+                </div>
+
+                <div className="absolute left-1/2">
+                    <SetaAmarela />
                 </div>
             </div>
         </div>
