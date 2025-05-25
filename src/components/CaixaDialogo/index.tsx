@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 type Props = {
     text: string[]
@@ -6,6 +7,17 @@ type Props = {
 
 export default function CaixaDialogo({ text, onClose }:Props) {
 
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handleClick = () => {
+        if (currentIndex < text.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        } else {
+            onClose();
+        }
+    };
+
     
     return (
         <div className="fixed inset-0 flex justify-center items-center z-50">
@@ -13,7 +25,8 @@ export default function CaixaDialogo({ text, onClose }:Props) {
 
 
             {/* Caixa de diálogo */}
-            <div className="relative min-w-160 h-50 z-50 p-px
+            <div onClick={handleClick} 
+                className="relative min-w-160 h-50 z-50 p-px
                 flex flex-row justify-between items-end
                 bg-stone-900 opacity-95 text-neutral-400 border-3 rounded-lg
                 select-none">
@@ -24,9 +37,8 @@ export default function CaixaDialogo({ text, onClose }:Props) {
                         Platão
                     </div>
 
-                    {text.map((frase, index) => (
-                        <p key={index}>{frase}</p>
-                    ))}
+                     <p>{text[currentIndex]}</p>
+
                 </div>
 
                 <div>
