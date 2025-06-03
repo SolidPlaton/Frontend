@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IQuestao } from "../interfaces/Questao";
 import { createContext, useState } from "react";
 import { IFaseState, IResposta } from "../interfaces/Fase";
+import { scoreCalculation } from "../utils/scoreCalculation";
 
 
 
@@ -31,7 +32,8 @@ export default function FaseContextProvider({children}:Props) {
     const defaultState: IFaseState = {
         questaoAtualIndex: 0,
         respostas: Array(questoes.length).fill(null),
-        tempoInicial: 300
+        tempoInicial: 300,
+        pontuacaoTotal: 0
     };
 
     const [faseState, setFaseState] = useState<IFaseState>(defaultState);
@@ -39,14 +41,16 @@ export default function FaseContextProvider({children}:Props) {
 
 
     function corrigirAlternativa(resposta: IResposta) {
-        const questaoAtual = questoes[faseState.questaoAtualIndex]
-        resposta.estaCorreta = resposta.alternativaSelecionada === questaoAtual.alternativaCorreta
+        const { alternativaCorreta } = questoes[faseState.questaoAtualIndex]
+        resposta = scoreCalculation(resposta, alternativaCorreta, faseState.tempoInicial)
 
         setFaseState(prevState => {
             const copiaRespostas = [...prevState.respostas]
             copiaRespostas[prevState.questaoAtualIndex] = resposta
 
-            return { ...prevState, respostas: copiaRespostas }
+            const pontuacaoTotal = calcularPontuacaoTotal(copiaRespostas)
+
+            return { ...prevState, respostas: copiaRespostas, pontuacaoTotal }
         });
     };
 
@@ -68,6 +72,15 @@ export default function FaseContextProvider({children}:Props) {
         setFaseState(novoState);
     }
     
+
+    function calcularPontuacaoTotal(respostas: IResposta[]) {
+        return respostas.reduce((soma, resposta)  => {
+            if (resposta) {
+                return soma + (resposta.valorAcerto || 0) + (resposta.bonusTempo || 0)
+            }
+            return soma
+        }, 0)
+    }
 
     return (
         <FaseContext.Provider value={{questoes, faseState, proximaQuestao, corrigirAlternativa}}>
