@@ -12,6 +12,7 @@ export interface IFaseState {
   questaoAtualIndex: number;
   respostas: IResposta[];
   tempoInicial: number;
+  pontuacaoTotal: number;
 }
 
 
@@ -20,4 +21,6 @@ export interface IResposta {
   alternativaSelecionada: number | null; // null caso o tempo acabe sem resposta
   tempoRestante: number;
   estaCorreta?: boolean;
+  valorAcerto?: number;
+  bonusTempo?: number;
 }
