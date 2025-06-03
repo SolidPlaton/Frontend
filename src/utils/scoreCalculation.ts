@@ -1,37 +1,21 @@
 import { IResposta } from "../interfaces/Fase";
 
 
-export const scoreCalculation = (valorBase: number, initialTime: number, respostas: IResposta[]) => {
-  let estrelas = 0;
-  let pontuacaoTotal = 0;
-
+export const scoreCalculation = (resposta:IResposta, alternativaCorreta: number, initialTime: number) => {
   const tresMinutos   = 180;
-  const quatroMinutos = 240;
-  const cincoMinutos  = 300;
 
-  respostas.forEach((resposta) => {
+  resposta.estaCorreta = resposta.alternativaSelecionada === alternativaCorreta
+
+  if (resposta.estaCorreta) {
+    resposta.valorAcerto = 500
+
     const tempoGasto = initialTime - resposta.tempoRestante
 
-    if (resposta.estaCorreta) {
-      estrelas += 1;
-      pontuacaoTotal += valorBase;
-
-      if (tempoGasto < tresMinutos) {
-        pontuacaoTotal += 400;
-      } else if (tempoGasto < quatroMinutos) {
-        pontuacaoTotal += 200;
-      } else if (tempoGasto < cincoMinutos) {
-        pontuacaoTotal += 100;
-      }
-
-    } else {
-      valorBase = Math.max(100, valorBase - 100)
+    if (tempoGasto <= tresMinutos) {
+      resposta.bonusTempo = 200;
     }
-  });
 
-  return {
-    estrelas,
-    pontuacaoTotal,
-    faseConcluida: estrelas >= 3
-  };
+  }
+
+  return resposta
 };
