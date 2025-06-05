@@ -13,6 +13,8 @@ export interface IFaseState {
   respostas: IResposta[];
   tempoInicial: number;
   pontuacaoTotal: number;
+  respostasCorretas: number;
+  faseConcluida: boolean;
 }
 
 

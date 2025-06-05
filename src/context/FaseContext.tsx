@@ -33,7 +33,9 @@ export default function FaseContextProvider({children}:Props) {
         questaoAtualIndex: 0,
         respostas: Array(questoes.length).fill(null),
         tempoInicial: 300,
-        pontuacaoTotal: 0
+        pontuacaoTotal: 0,
+        respostasCorretas: 0,
+        faseConcluida: false
     };
 
     const [faseState, setFaseState] = useState<IFaseState>(defaultState);
@@ -48,9 +50,11 @@ export default function FaseContextProvider({children}:Props) {
             const copiaRespostas = [...prevState.respostas]
             copiaRespostas[prevState.questaoAtualIndex] = resposta
 
-            const pontuacaoTotal = calcularPontuacaoTotal(copiaRespostas)
+            const pontuacaoTotal    = calcularPontuacaoTotal(copiaRespostas)
+            const respostasCorretas = copiaRespostas.filter(r => r && r.estaCorreta).length
+            const faseConcluida     = respostasCorretas >= 3
 
-            return { ...prevState, respostas: copiaRespostas, pontuacaoTotal }
+            return { ...prevState, respostas: copiaRespostas, pontuacaoTotal, respostasCorretas, faseConcluida }
         });
     };
 
@@ -63,9 +67,7 @@ export default function FaseContextProvider({children}:Props) {
         };
 
         if (novoState.questaoAtualIndex >= questoes.length) {
-            navigate('/fase/resultado', {state: {
-                respostas: novoState.respostas, 
-                initialTime: faseState.tempoInicial}});
+            navigate('/fase/resultado', {state: { faseState }});
             return
         }
 
