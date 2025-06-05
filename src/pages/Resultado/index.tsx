@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { IResposta } from "../../interfaces/Fase";
-import { scoreCalculation } from "../../utils/scoreCalculation";
+import { IFaseState } from "../../interfaces/Fase";
 import { useEffect, useState } from "react";
 import ProximoButton from "../../components/Resultado/ProximoButton";
 import DisplayRecompensas from "../../components/Resultado/DisplayRecompensas";
@@ -12,8 +11,7 @@ export default function Resultado() {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const respostas = location.state?.respostas as IResposta[]
-    const initialTime = location.state?.initialTime as number
+    const faseState = location.state?.faseState as IFaseState
 
     const [estrelas, setEstrelas] = useState(0)
     const [faseConcluida, setFaseConcluida] = useState(false)
@@ -21,18 +19,16 @@ export default function Resultado() {
 
 
     useEffect(() => {
-        if (!respostas || initialTime === undefined) {
+        if (!faseState) {
             navigate('/campanha')
             return
         }
-        
-        const resultado = scoreCalculation(600, initialTime, respostas)
 
-        setEstrelas(resultado.estrelas)
-        setFaseConcluida(resultado.faseConcluida)
-        setPontuacaoTotal(resultado.pontuacaoTotal)
+        setEstrelas(faseState.respostasCorretas)
+        setFaseConcluida(faseState.faseConcluida)
+        setPontuacaoTotal(faseState.pontuacaoTotal)
 
-    }, [respostas, initialTime, navigate])
+    }, [faseState, navigate])
 
 
 
