@@ -3,6 +3,7 @@ import { IFaseState } from "../../interfaces/Fase";
 import { useEffect, useState } from "react";
 import ProximoButton from "../../components/Resultado/ProximoButton";
 import DisplayRecompensas from "../../components/Resultado/DisplayRecompensas";
+import { api } from "../../api/axios";
 
 
 
@@ -23,6 +24,19 @@ export default function Resultado() {
             navigate('/campanha')
             return
         }
+
+        const salvarPontuacao = async (valor:number) => {
+            try {
+                if (valor > 0) {
+                    const response =  await api.patch('/api/fase/5/pontuacao', { valor })
+                }
+            } catch (error) {
+                console.error("Erro ao salvar Fase no Banco", error);
+            }
+        }
+
+        salvarPontuacao(faseState.pontuacaoTotal)
+
 
         setEstrelas(faseState.respostasCorretas)
         setFaseConcluida(faseState.faseConcluida)
