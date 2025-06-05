@@ -10,6 +10,7 @@ import Timer from "../Timer"
 import EnunciadoQuestaoAtual from "../EnunciadoQuestaoAtual"
 import { IResposta } from "../../../interfaces/Fase"
 import useTimer from "../../../hooks/useTimer"
+import { DisplayPontuacao } from "../DisplayPontuacao"
 
 
 export default function DisplayQuestoes() {
@@ -44,6 +45,8 @@ export default function DisplayQuestoes() {
     
     return (
         <BackgroundQuestao >
+
+                <DisplayPontuacao />
             
                 <div className="w-full flex flex-row justify-between items-center sticky top-0 bg-zinc-900/80">
                     <FecharButton />
