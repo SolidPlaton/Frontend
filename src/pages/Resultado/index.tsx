@@ -36,8 +36,18 @@ export default function Resultado() {
             }
         }
 
-        salvarPontuacao(faseState.pontuacaoTotal)
+        const salvarEstrelas = async (quantidade:number) => {
+            try {
+                if (quantidade >= 3) {
+                    const response =  await api.patch(`/api/fase/${fase.id}/estrelas`, { quantidade })
+                }
+            } catch (error) {
+                console.error("Erro ao salvar Fase no Banco", error);
+            }
+        }
 
+        salvarPontuacao(faseState.pontuacaoTotal)
+        salvarEstrelas(faseState.respostasCorretas)
 
         setEstrelas(faseState.respostasCorretas)
         setFaseConcluida(faseState.faseConcluida)
