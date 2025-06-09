@@ -16,12 +16,15 @@ export default function DescricaoFase() {
     const img_path = location.state?.img_path ?? "";
 
     const [fase, setFase] = useState<IFase>()
+    const [melhorPontuacao, setMelhorPontuacao] = useState<IFase>()
 
     useEffect(() => {
         const fetchFase = async () => {
             try {
                 const response =  await api.get(`/api/fase/${id}`)
+                const melhorPontuacaoResponse =  await api.get(`/api/fase/${id}/pontuacao`)
                 setFase(response.data.fase)
+                setMelhorPontuacao(melhorPontuacaoResponse.data.valor)
             } catch (error) {
                 console.error("Erro ao buscar dados da Fase:", error);
             }
@@ -54,7 +57,7 @@ export default function DescricaoFase() {
 
                     <Link 
                         to={`/fase/${id}/questoes`} 
-                        state={{ questoes: fase?.questoes }}>
+                        state={{ fase, melhorPontuacao }}>
                             <div className="bg-fuchsia-950 text-white h-12 w-48 rounded-xl cursor-pointer
                                                 flex items-center justify-center
                                                 border-2 border-black hover:border-orange-400 hover:text-orange-400">

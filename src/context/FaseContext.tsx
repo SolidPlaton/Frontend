@@ -1,12 +1,14 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { IQuestao } from "../interfaces/Questao";
 import { createContext, useState } from "react";
-import { IFaseState, IResposta } from "../interfaces/Fase";
+import { IFase, IFaseState, IResposta } from "../interfaces/Fase";
 import { scoreCalculation } from "../utils/scoreCalculation";
 
 
 
 interface IFaseContext {
+    fase:IFase
+    melhorPontuacao: number
     questoes: IQuestao[]
     faseState: IFaseState
     proximaQuestao: () => void
@@ -27,7 +29,10 @@ export default function FaseContextProvider({children}:Props) {
 
     const location = useLocation();
     
-    const questoes: IQuestao[] = location.state?.questoes || [];
+    const fase:IFase = location.state?.fase || null
+    const melhorPontuacao:number = location.state?.melhorPontuacao || null
+
+    const questoes = fase.questoes || []
 
     const defaultState: IFaseState = {
         questaoAtualIndex: 0,
@@ -85,7 +90,7 @@ export default function FaseContextProvider({children}:Props) {
     }
 
     return (
-        <FaseContext.Provider value={{questoes, faseState, proximaQuestao, corrigirAlternativa}}>
+        <FaseContext.Provider value={{fase, melhorPontuacao, questoes, faseState, proximaQuestao, corrigirAlternativa}}>
             {children}
         </FaseContext.Provider>
     )
