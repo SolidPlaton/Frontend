@@ -72,7 +72,7 @@ export default function FaseContextProvider({children}:Props) {
         };
 
         if (novoState.questaoAtualIndex >= questoes.length) {
-            navigate('/fase/resultado', {state: { faseState }});
+            navigate('/fase/resultado', {state: { fase, faseState }});
             return
         }
 
