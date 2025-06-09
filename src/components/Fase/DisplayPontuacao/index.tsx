@@ -14,7 +14,7 @@ export function DisplayPontuacao() {
                     melhorPontuacao!! && (
                         <>
                             <p>melhor pontuação</p>
-                            <p className="text-2xl">{ melhorPontuacao }</p>
+                            <p className="text-2xl">{ (melhorPontuacao > faseState.pontuacaoTotal) ? melhorPontuacao : faseState.pontuacaoTotal }</p>
                         </>
                     )
                 }
