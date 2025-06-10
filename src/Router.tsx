@@ -6,6 +6,7 @@ import Campanha from "./pages/Campanha";
 import DescricaoFase from "./pages/DescricaoFase";
 import Fase from "./pages/Fase";
 import Resultado from "./pages/Resultado";
+import Ranking from "./pages/Ranking";
 
 export function Router() {
     const {user} = useAuth()
@@ -31,6 +32,7 @@ export function Router() {
                     <Route path="/fase/:id" element={ <DescricaoFase /> } />
                     <Route path="/fase/:id/questoes" element={ <Fase /> } />
                     <Route path="/fase/resultado" element={ <Resultado /> } />
+                    <Route path="/ranking" element={ <Ranking /> } />
                     </>
                 )
             }
