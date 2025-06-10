@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { useAuth } from "./hooks/useAuth";
 import Cadastro from "./pages/Cadastro";
@@ -7,11 +7,22 @@ import DescricaoFase from "./pages/DescricaoFase";
 import Fase from "./pages/Fase";
 import Resultado from "./pages/Resultado";
 import Ranking from "./pages/Ranking";
+import { useEffect } from "react";
 
 export function Router() {
     const {user} = useAuth()
     const isLogged = !!user
     const location = useLocation()
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLogged && location.pathname === "/") {
+            navigate("/campanha");
+        }
+    }, [isLogged, location, navigate]);
+
+
 
     return (
         <Routes location={location} key={location.pathname}>
