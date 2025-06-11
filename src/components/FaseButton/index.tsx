@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { api } from "../../api/axios";
 
 
 type Props = {
@@ -9,13 +11,52 @@ type Props = {
 
 export default function FaseButton({ img_path, fase_id }:Props) {
 
+    const [desbloqueada, setDesbloqueada] = useState(false);
 
-    return (
-        <Link to={`/fase/${fase_id}`} state={{img_path}} >
-            <img draggable="false" src={img_path} alt={img_path} 
-                className="min-w-[96px] max-w-[96px] cursor-pointer border-4 rounded-4xl 
-                hover:border-orange-400 hover:scale-125
-                transition duration-150 ease-in-out"/>
-        </Link>
-    )
-}
+
+    useEffect(() => {
+        if (fase_id === 1) {
+            setDesbloqueada(true);
+            return;
+        }
+
+
+        async function checkFaseAnterior() {
+            try {
+                const res = await api.get<{ quantidade: number | null }>(
+                    `/api/fase/${fase_id - 1}/estrelas`
+                );
+                setDesbloqueada(res.data.quantidade! > 0);
+            } catch (err) {
+                setDesbloqueada(false);
+            }
+        }
+
+        checkFaseAnterior();
+    }, [fase_id]);
+
+
+        return (
+            <>
+                {desbloqueada ? (
+                    <Link to={`/fase/${fase_id}`} state={{ img_path }}>
+                        <img
+                            draggable="false"
+                            src={img_path}
+                            alt={`Fase ${fase_id}`}
+                            className="min-w-[96px] max-w-[96px] cursor-pointer border-4 rounded-4xl hover:border-orange-400 hover:scale-125 transition duration-150 ease-in-out"
+                        />
+                    </Link>
+                ) : (
+                    <div title="Indisponível">
+                        <img
+                            draggable="false"
+                            src={img_path}
+                            alt={`Fase ${fase_id} (bloqueada)`}
+                            className="min-w-[96px] max-w-[96px] border-4 rounded-4xl filter grayscale opacity-50"
+                        />
+                    </div>
+                )}
+            </>
+        );
+    }
