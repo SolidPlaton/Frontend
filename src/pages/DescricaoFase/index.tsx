@@ -79,11 +79,11 @@ export default function DescricaoFase() {
             </Link>
 
             <div className="w-full mb-28 flex flex-col justify-between items-center gap-y-6 mt-5">
-                <p className="text-3xl text-white select-none">O Meteoro!</p>
+                <p className="text-3xl text-white select-none">O Terremoto!</p>
 
                 <div>
                     <p className="text-white w-100 select-none text-base text-center font-extralight italic opacity-80">
-                        “Os meteoros são um fenômeno resultante da entrada de fragmentos de rocha espacial na atmosfera terrestre”
+                        “O maior e mais potente terremoto registrado na história foi o ocorrido no Chile, em 1960, com 9.5 de magnitude na escala Richter.”
                     </p>
                 </div>
                 
@@ -106,7 +106,11 @@ export default function DescricaoFase() {
                     <div className="flex flex-col items-center gap-y-3.5">
                         <DisplayEstrelas estrelas={estrelas} />
                         <div>
-                            {img_path && <img draggable="false" src={concluida ? "/public/images/solidos/hexaedro.png" :img_path} alt="Imagem da fase" className="w-40" />}
+                            {img_path && concluida 
+                                ? <img draggable="false" src={"/public/images/solidos/hexaedro.png"} alt="Imagem da fase" className="w-40" />
+                                : <img draggable="false" src={"/public/images/solidos/hexaedro.png"} alt="Imagem da fase" 
+                                       className="w-40 filter grayscale opacity-30" title="desaparecido" />
+                            }
                         </div>
                         <p className="text-white">
                             melhor pontuação: {melhorPontuacao || 0} pts
