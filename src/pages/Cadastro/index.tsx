@@ -7,11 +7,14 @@ import { FormButton } from "../../components/FormButton";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import DialogosEnum from "../../enums/Dialogos";
+import { DialogosContext } from "../../context/Dialogos";
 
 
 
 export default function Cadastro()  {
     const auth = useContext(AuthContext);
+    const {triggerDialog} = useContext(DialogosContext);
     const navigate = useNavigate();
   
     const {
@@ -31,6 +34,7 @@ export default function Cadastro()  {
             if (response.status === 200) {
                 auth.logar(data.email, data.senha)
                 navigate("/");
+                triggerDialog(DialogosEnum.introducao)
             }
         } catch (error) {
             console.error(error)

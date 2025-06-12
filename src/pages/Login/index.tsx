@@ -6,11 +6,14 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserSchemaSignIn, UserSchemaSignInType } from "../../utils/signinValidation";
 import { FormInput } from "../../components/FormInput";
 import { FormButton } from "../../components/FormButton";
+import { DialogosContext } from "../../context/Dialogos";
+import DialogosEnum from "../../enums/Dialogos";
 
 
 
 export default function Login() {
   const auth = useContext(AuthContext);
+  const {triggerDialog} = useContext(DialogosContext)
   const navigate = useNavigate();
 
   const {
@@ -27,6 +30,7 @@ export default function Login() {
     if (email && password) {
       auth.logar(email, password);
       navigate("/");
+      triggerDialog(DialogosEnum.introducao)
     }
   }
 
