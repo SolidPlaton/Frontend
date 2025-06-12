@@ -22,6 +22,8 @@ export default function DescricaoFase() {
     const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
     const [estrelas, setEstrelas] = useState(0)
 
+    const [concluida, setConcluida] = useState(false)
+
     const { triggerDialog } = useContext(DialogosContext)
 
 
@@ -48,6 +50,20 @@ export default function DescricaoFase() {
             const valorEnum = DialogosEnum[nome as keyof typeof DialogosEnum];
             triggerDialog(valorEnum) 
         }
+
+        
+        async function faseConcluida() {
+            try {
+                const res = await api.get<{ quantidade: number | null }>(
+                    `/api/fase/${fase?.id}/estrelas`
+                );
+                setConcluida(res.data.quantidade! >= 3);
+            } catch (err) {
+                setConcluida(false);
+            }
+        }
+
+        faseConcluida();
     }, [fase])
 
     return (
@@ -90,7 +106,7 @@ export default function DescricaoFase() {
                     <div className="flex flex-col items-center gap-y-3.5">
                         <DisplayEstrelas estrelas={estrelas} />
                         <div>
-                            {img_path && <img draggable="false" src={img_path} alt="Imagem da fase" className="w-40" />}
+                            {img_path && <img draggable="false" src={concluida ? "/public/images/solidos/hexaedro.png" :img_path} alt="Imagem da fase" className="w-40" />}
                         </div>
                         <p className="text-white">
                             melhor pontuação: {melhorPontuacao || 0} pts
