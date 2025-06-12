@@ -1,6 +1,4 @@
 import CaixaRecompensa from "../CaixaRecompensa"
-import cubo from "/images/solidos/cubo-removebg-preview.png"
-import terremoto from "/images/fases/terremoto.jpg"
 
 import estrela_grande from "/images/elementos/Star-grande.png"
 
@@ -21,8 +19,8 @@ export default function DisplayRecompensas({ estrelas, faseConcluida, pontuacaoT
         <div className="flex flex-row gap-x-5">
             <CaixaRecompensa>
                 <img className="w-36" draggable="false"
-                    src={faseConcluida ? cubo : terremoto} 
-                    alt={faseConcluida ? cubo : terremoto} />
+                    src={faseConcluida ? "/public/images/solidos/hexaedro.png" : "/public/images/fases/terremoto.png"} 
+                    alt={faseConcluida ? "hexaedro" : "terremoto"} />
 
                 <p className="text-white select-none">
                     {faseConcluida ? 'sólido encontrado!' : 'sólido não encontrado' }

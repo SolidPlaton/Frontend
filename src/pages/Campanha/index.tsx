@@ -1,10 +1,10 @@
 import FaseButton from "../../components/FaseButton"
 import earth from "/images/earth-parents-wiki_ver_1-removebg-preview 1.png"
-import meteoro from "/images/fases/meteoro.jpg"
-import tornado from "/images/fases/tornado.jpg"
-import vulcao from "/images/fases/vulcao.jpg"
-import terremoto from "/images/fases/terremoto.jpg"
-import tsunami from "/images/fases/tsunami.jpg"
+import meteoro from "/images/fases/meteoro.png"
+import tufao from "/images/fases/tufao.png"
+import vulcao from "/images/fases/vulcao.png"
+import terremoto from "/images/fases/terremoto.png"
+import tsunami from "/images/fases/tsunami.png"
 import Layout from "../../components/Layout"
 
 
@@ -28,11 +28,11 @@ export default function Campanha() {
                 <FaseButton img_path={vulcao} fase_id={3} />
             </div>
 
-            <div className="absolute top-52 left-[330px]">
-                <FaseButton img_path={tornado} fase_id={4} />
+            <div className="absolute top-36 left-[330px]">
+                <FaseButton img_path={tufao} fase_id={4} />
             </div>
 
-            <div className="absolute top-14 left-[550px]">
+            <div className="absolute top-5 left-[550px]">
                 <FaseButton img_path={meteoro} fase_id={5} />
             </div>
         </Layout>
