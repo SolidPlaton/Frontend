@@ -43,7 +43,7 @@ export default function CaixaDialogo({ text, onClose }:Props) {
                 </div>
 
                 <div>
-                    <img src="/images/platao/platao-removebg-preview.png" alt="Platão" 
+                    <img src="/images/platao/platao.png" alt="Platão" 
                         className="w-80" />
                 </div>
 
