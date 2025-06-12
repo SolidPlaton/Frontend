@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { IFase } from "../../interfaces/Fase";
 import { api } from "../../api/axios"
@@ -7,7 +7,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import caret_left from "/images/icons/caret-left.svg"
 import DisplayEstrelas from "../../components/DisplayEstrelas";
 import DialogosEnum from "../../enums/Dialogos";
-import CaixaDialogo from "../../components/CaixaDialogo";
+import { DialogosContext } from "../../context/Dialogos";
 
 type FaseParams = {
     id: string;
@@ -22,11 +22,8 @@ export default function DescricaoFase() {
     const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
     const [estrelas, setEstrelas] = useState(0)
 
-    const [text, setText] = useState<string[]>([])
+    const { triggerDialog } = useContext(DialogosContext)
 
-    function handleText() {
-        setText([])
-    }
 
     useEffect(() => {
         const fetchFase = async () => {
@@ -46,23 +43,15 @@ export default function DescricaoFase() {
     }, [id])
 
     useEffect(() => {
-        const nome = fase?.nome
-
-        const valorEnum = DialogosEnum[nome as keyof typeof DialogosEnum];
-
-
-        if (valorEnum) {
-            fetch(`/dialogs/${valorEnum}.json`)
-                .then((response) => response.json())
-                .then((data) => setText(data.text))
-                .catch((error) => console.error("Erro ao carregar o JSON:", error));
-        }        
+        if (fase?.nome) {
+            const nome = fase?.nome
+            const valorEnum = DialogosEnum[nome as keyof typeof DialogosEnum];
+            triggerDialog(valorEnum) 
+        }
     }, [fase])
 
     return (
         <Layout>
-
-            {text.length > 0 &&  <CaixaDialogo text={text} onClose={handleText} />}
 
             <Link to='/campanha' className="w-fit flex m-6">
                 <div className="flex flex-row items-center justify-start w-16">
