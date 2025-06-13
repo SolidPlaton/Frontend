@@ -54,10 +54,12 @@ export default function DescricaoFase() {
         
         async function faseConcluida() {
             try {
-                const res = await api.get<{ quantidade: number | null }>(
-                    `/api/fase/${fase?.id}/estrelas`
-                );
-                setConcluida(res.data.quantidade! >= 3);
+                if (fase?.id) {
+                    const res = await api.get<{ quantidade: number | null }>(
+                        `/api/fase/${fase?.id}/estrelas`
+                    );
+                    setConcluida(res.data.quantidade! >= 3);
+                }
             } catch (err) {
                 setConcluida(false);
             }
