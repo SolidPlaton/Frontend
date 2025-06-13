@@ -13,7 +13,7 @@ export default function Campanha() {
     
     return (
         <Layout>
-            <img draggable="false" src={earth} alt="earth" className="min-w-6xl max-w-6xl
+            <img draggable="false" src={earth} alt="earth" className="min-w-6xl max-w-6xl filter opacity-50 select-none
             fixed top-3"/>
 
             <div className="absolute top-64 left-[730px]">

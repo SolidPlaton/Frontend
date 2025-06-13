@@ -72,7 +72,7 @@ export default function FaseButton({ img_path, fase_id }:Props) {
                             draggable="false"
                             src={img_path}
                             alt={`Fase ${fase_id}`}
-                            className="min-w-[150px] max-w-[150px] cursor-pointer hover:scale-125 transition duration-150 ease-in-out select-none"
+                            className="min-w-[150px] max-w-[150px] cursor-pointer group-hover:scale-125 transition duration-150 ease-in-out select-none"
                         />
 
                         <p className="text-white opacity-0 group-hover:opacity-100 transition duration-150">
@@ -86,7 +86,7 @@ export default function FaseButton({ img_path, fase_id }:Props) {
                             draggable="false"
                             src={img_path}
                             alt={`Fase ${fase_id} (bloqueada)`}
-                            className="min-w-[155px] max-w-[150px] filter grayscale opacity-50 select-none"
+                            className="min-w-[155px] max-w-[150px] filter grayscale  select-none"
                         />
                     </div>
                 )}
