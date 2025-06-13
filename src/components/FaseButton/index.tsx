@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { api } from "../../api/axios";
+import DisplayEstrelas from "../DisplayEstrelas";
 
 
 type Props = {
@@ -12,9 +13,26 @@ type Props = {
 export default function FaseButton({ img_path, fase_id }:Props) {
 
     const [desbloqueada, setDesbloqueada] = useState(false);
+    const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
+    const [estrelas, setEstrelas] = useState(0)
 
 
     useEffect(() => {
+
+        const fetchFase = async () => {
+            try {
+                const melhorPontuacaoResponse = await api.get(`/api/fase/${fase_id}/pontuacao`)
+                const estrelas                = await api.get(`/api/fase/${fase_id}/estrelas`)
+                setMelhorPontuacao(melhorPontuacaoResponse.data.valor)
+                setEstrelas(estrelas.data.quantidade)
+            } catch (error) {
+                console.error("Erro ao buscar dados da Fase:", error);
+            }
+        }
+
+        fetchFase()
+
+
         if (fase_id === 1) {
             setDesbloqueada(true);
             return;
@@ -39,14 +57,29 @@ export default function FaseButton({ img_path, fase_id }:Props) {
         return (
             <>
                 {desbloqueada ? (
-                    <Link to={`/fase/${fase_id}`} state={{ img_path }}>
+                    <Link
+                        to={`/fase/${fase_id}`}
+                        state={{ img_path }}
+                        className="group relative flex flex-col items-center" >
+                        
+                        <div className="opacity-0 group-hover:opacity-100 transition duration-150">
+                            <DisplayEstrelas
+                                estrelas={estrelas}
+                            />
+                        </div>
+
                         <img
                             draggable="false"
                             src={img_path}
                             alt={`Fase ${fase_id}`}
                             className="min-w-[150px] max-w-[150px] cursor-pointer hover:scale-125 transition duration-150 ease-in-out select-none"
                         />
+
+                        <p className="text-white opacity-0 group-hover:opacity-100 transition duration-150">
+                            {melhorPontuacao || 0} pts
+                        </p>
                     </Link>
+
                 ) : (
                     <div title="Indisponível">
                         <img
