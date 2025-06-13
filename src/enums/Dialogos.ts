@@ -5,8 +5,13 @@ enum DialogosEnum {
     Tufão = "tufao",
     Meteoro = "meteoro",
     Maremoto = "maremoto",
-    Vulcão = "vulcao"
+    Vulcão = "vulcao",
 
+    uma_estrela = "uma-estrela",
+    duas_estrelas = "duas-estrelas",
+    tres_estrelas = "tres-estrelas",
+    quatro_estrelas = "quatro-estrelas",
+    cinco_estrelas = "cinco-estrelas"
 }
 
 

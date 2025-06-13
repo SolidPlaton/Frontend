@@ -1,15 +1,19 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { IFase, IFaseState } from "../../interfaces/Fase";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProximoButton from "../../components/Resultado/ProximoButton";
 import DisplayRecompensas from "../../components/Resultado/DisplayRecompensas";
 import { api } from "../../api/axios";
+import { DialogosContext } from "../../context/Dialogos";
+import DialogosEnum from "../../enums/Dialogos";
 
 
 
 export default function Resultado() {
 
     const navigate = useNavigate();
+
+    const {triggerDialog} = useContext(DialogosContext)
 
     const location = useLocation();
     const fase = location.state?.fase as IFase
@@ -52,6 +56,24 @@ export default function Resultado() {
         setEstrelas(faseState.respostasCorretas)
         setFaseConcluida(faseState.faseConcluida)
         setPontuacaoTotal(faseState.pontuacaoTotal)
+
+        switch (faseState.respostasCorretas) {
+            case 1: 
+                triggerDialog(DialogosEnum.uma_estrela)
+                break;
+            case 2:
+                triggerDialog(DialogosEnum.duas_estrelas)
+                break;
+            case 3:
+                triggerDialog(DialogosEnum.tres_estrelas)
+                break;
+            case 4:
+                triggerDialog(DialogosEnum.quatro_estrelas)
+                break;
+            case 5:
+                triggerDialog(DialogosEnum.cinco_estrelas)
+                break;
+        }
 
     }, [faseState, navigate])
 
