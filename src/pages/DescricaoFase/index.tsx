@@ -18,6 +18,7 @@ export default function DescricaoFase() {
     const { id } = useParams<FaseParams>()
     const location = useLocation();
     const img_path = location.state?.img_path ?? "";
+    const curiosidade = location.state?.curiosidade ?? "";
 
     const [fase, setFase] = useState<IFase>()
     const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
@@ -100,7 +101,7 @@ export default function DescricaoFase() {
 
                 <div>
                     <p className="text-white w-100 select-none text-base text-center font-extralight italic opacity-80">
-                        “O maior e mais potente terremoto registrado na história foi o ocorrido no Chile, em 1960, com 9.5 de magnitude na escala Richter.”
+                        "{ curiosidade }"                    
                     </p>
                 </div>
                 
