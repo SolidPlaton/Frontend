@@ -44,7 +44,7 @@ export default function FaseButton({ img_path, fase_id }:Props) {
                 const res = await api.get<{ quantidade: number | null }>(
                     `/api/fase/${fase_id - 1}/estrelas`
                 );
-                setDesbloqueada(res.data.quantidade! > 0);
+                setDesbloqueada(res.data.quantidade! >= 3);
             } catch (err) {
                 setDesbloqueada(false);
             }

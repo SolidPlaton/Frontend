@@ -42,7 +42,7 @@ export default function Resultado() {
 
         const salvarEstrelas = async (quantidade:number) => {
             try {
-                if (quantidade >= 3) {
+                if (quantidade > 0) {
                     const response =  await api.patch(`/api/fase/${fase.id}/estrelas`, { quantidade })
                 }
             } catch (error) {
