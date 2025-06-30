@@ -8,6 +8,7 @@ import caret_left from "/images/icons/caret-left.svg"
 import DisplayEstrelas from "../../components/DisplayEstrelas";
 import DialogosEnum from "../../enums/Dialogos";
 import { DialogosContext } from "../../context/Dialogos";
+import { ISolido } from "../../interfaces/Solido";
 
 type FaseParams = {
     id: string;
@@ -21,6 +22,8 @@ export default function DescricaoFase() {
     const [fase, setFase] = useState<IFase>()
     const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
     const [estrelas, setEstrelas] = useState(0)
+
+    const [solido, setSolido] = useState<ISolido>()
 
     const [concluida, setConcluida] = useState(false)
 
@@ -42,6 +45,18 @@ export default function DescricaoFase() {
         }
 
         fetchFase()
+
+
+        const fetchSolido = async () => {
+            try {
+                const response = await api.get(`/api/solido/${id}`)
+                setSolido(response.data.solido) 
+            } catch (error) {
+                console.error("Erro ao buscar solido da Fase:", error);
+            }
+        }
+
+        fetchSolido()
     }, [id])
 
     useEffect(() => {
@@ -81,7 +96,7 @@ export default function DescricaoFase() {
             </Link>
 
             <div className="w-full mb-28 flex flex-col justify-between items-center gap-y-6 mt-5">
-                <p className="text-3xl text-white select-none">O Terremoto!</p>
+                <p className="text-3xl text-white select-none">O {fase?.nome}</p>
 
                 <div>
                     <p className="text-white w-100 select-none text-base text-center font-extralight italic opacity-80">
@@ -109,8 +124,8 @@ export default function DescricaoFase() {
                         <DisplayEstrelas estrelas={estrelas} />
                         <div>
                             {img_path && concluida 
-                                ? <img draggable="false" src={"/public/images/solidos/hexaedro.png"} alt="Imagem da fase" className="w-40" />
-                                : <img draggable="false" src={"/public/images/solidos/hexaedro.png"} alt="Imagem da fase" 
+                                ? <img draggable="false" src={solido?.img_path} alt="Imagem da fase" className="w-40" />
+                                : <img draggable="false" src={solido?.img_path} alt="Imagem da fase" 
                                        className="w-40 filter grayscale opacity-30" title="desaparecido" />
                             }
                         </div>
