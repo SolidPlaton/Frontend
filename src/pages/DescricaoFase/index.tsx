@@ -18,6 +18,7 @@ export default function DescricaoFase() {
     const { id } = useParams<FaseParams>()
     const location = useLocation();
     const img_path = location.state?.img_path ?? "";
+    const fase_nome = location.state?.fase_nome ?? "";
     const curiosidade = location.state?.curiosidade ?? "";
 
     const [fase, setFase] = useState<IFase>()
@@ -97,7 +98,7 @@ export default function DescricaoFase() {
             </Link>
 
             <div className="w-full mb-28 flex flex-col justify-between items-center gap-y-6 mt-5">
-                <p className="text-3xl text-white select-none">O {fase?.nome}</p>
+                <p className="text-3xl text-white select-none">{fase_nome}</p>
 
                 <div>
                     <p className="text-white w-100 select-none text-base text-center font-extralight italic opacity-80">

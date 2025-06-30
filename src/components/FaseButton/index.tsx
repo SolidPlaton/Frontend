@@ -7,11 +7,12 @@ import DisplayEstrelas from "../DisplayEstrelas";
 type Props = {
     img_path: string,
     fase_id: number,
+    fase_nome: string,
     curiosidade: string
 }
 
 
-export default function FaseButton({ img_path, fase_id, curiosidade }:Props) {
+export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }:Props) {
 
     const [desbloqueada, setDesbloqueada] = useState(false);
     const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
@@ -60,7 +61,7 @@ export default function FaseButton({ img_path, fase_id, curiosidade }:Props) {
                 {desbloqueada ? (
                     <Link
                         to={`/fase/${fase_id}`}
-                        state={{ img_path, curiosidade }}
+                        state={{ img_path, curiosidade, fase_nome }}
                         className="group relative flex flex-col items-center" >
                         
                         <div className="opacity-0 group-hover:opacity-100 transition duration-150">
