@@ -2,17 +2,15 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { api } from "../../api/axios";
 import DisplayEstrelas from "../DisplayEstrelas";
+import { fase } from "../../types/fase";
 
 
 type Props = {
-    img_path: string,
-    fase_id: number,
-    fase_nome: string,
-    curiosidade: string
+    fase: fase
 }
 
 
-export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }:Props) {
+export default function FaseButton({ fase }:Props) {
 
     const [desbloqueada, setDesbloqueada] = useState(false);
     const [melhorPontuacao, setMelhorPontuacao] = useState<number|null>(null)
@@ -23,8 +21,8 @@ export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }
 
         const fetchFase = async () => {
             try {
-                const melhorPontuacaoResponse = await api.get(`/api/fase/${fase_id}/pontuacao`)
-                const estrelas                = await api.get(`/api/fase/${fase_id}/estrelas`)
+                const melhorPontuacaoResponse = await api.get(`/api/fase/${fase.id}/pontuacao`)
+                const estrelas                = await api.get(`/api/fase/${fase.id}/estrelas`)
                 setMelhorPontuacao(melhorPontuacaoResponse.data.valor)
                 setEstrelas(estrelas.data.quantidade)
             } catch (error) {
@@ -35,7 +33,7 @@ export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }
         fetchFase()
 
 
-        if (fase_id === 1) {
+        if (fase.id === 1) {
             setDesbloqueada(true);
             return;
         }
@@ -44,7 +42,7 @@ export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }
         async function checkFaseAnterior() {
             try {
                 const res = await api.get<{ quantidade: number | null }>(
-                    `/api/fase/${fase_id - 1}/estrelas`
+                    `/api/fase/${fase.id - 1}/estrelas`
                 );
                 setDesbloqueada(res.data.quantidade! >= 3);
             } catch (err) {
@@ -53,15 +51,17 @@ export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }
         }
 
         checkFaseAnterior();
-    }, [fase_id]);
+    }, [fase.id]);
 
 
         return (
             <>
                 {desbloqueada ? (
                     <Link
-                        to={`/fase/${fase_id}`}
-                        state={{ img_path, curiosidade, fase_nome }}
+                        to={`/fase/${fase.id}`}
+                        state={{ img_path: fase.img_path,
+                                 curiosidade: fase.curiosidade, 
+                                 fase_nome: fase.nome }}
                         className="group relative flex flex-col items-center" >
                         
                         <div className="opacity-0 group-hover:opacity-100 transition duration-150">
@@ -72,8 +72,8 @@ export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }
 
                         <img
                             draggable="false"
-                            src={img_path}
-                            alt={`Fase ${fase_id}`}
+                            src={fase.img_path}
+                            alt={`Fase ${fase.id}`}
                             className="min-w-[150px] max-w-[150px] cursor-pointer group-hover:scale-125 transition duration-150 ease-in-out select-none"
                         />
 
@@ -86,8 +86,8 @@ export default function FaseButton({ img_path, fase_id, fase_nome, curiosidade }
                     <div title="Indisponível">
                         <img
                             draggable="false"
-                            src={img_path}
-                            alt={`Fase ${fase_id} (bloqueada)`}
+                            src={fase.img_path}
+                            alt={`Fase ${fase.id} (bloqueada)`}
                             className="min-w-[155px] max-w-[150px] filter grayscale  select-none"
                         />
                     </div>
