@@ -59,9 +59,7 @@ export default function FaseButton({ fase }:Props) {
                 {desbloqueada ? (
                     <Link
                         to={`/fase/${fase.id}`}
-                        state={{ img_path: fase.img_path,
-                                 curiosidade: fase.curiosidade, 
-                                 fase_nome: fase.nome }}
+                        state={{ fase }}
                         className="group relative flex flex-col items-center" >
                         
                         <div className="opacity-0 group-hover:opacity-100 transition duration-150">
