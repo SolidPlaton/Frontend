@@ -4,23 +4,25 @@ import estrela_grande from "/images/elementos/Star-grande.png"
 
 import louros from "/images/elementos/louros-removebg-preview.png"
 import DisplayEstrelas from "../../DisplayEstrelas"
+import { fase } from "../../../types/fase"
 
 
 
 type DisplayRecompensasProps = {
+    fase: fase,
     faseConcluida: boolean,
     estrelas: number,
     pontuacaoTotal: number
 }
 
-export default function DisplayRecompensas({ estrelas, faseConcluida, pontuacaoTotal }:DisplayRecompensasProps) {
+export default function DisplayRecompensas({ fase, estrelas, faseConcluida, pontuacaoTotal }:DisplayRecompensasProps) {
 
     return (
         <div className="flex flex-row gap-x-5">
             <CaixaRecompensa>
                 <img className="w-36" draggable="false"
-                    src={faseConcluida ? "/public/images/solidos/hexaedro.png" : "/public/images/fases/terremoto.png"} 
-                    alt={faseConcluida ? "hexaedro" : "terremoto"} />
+                    src={faseConcluida ? fase.solido.img_path : fase.img_path} 
+                    alt={faseConcluida ? "concluída!" : "não concluída..."} />
 
                 <p className="text-white select-none">
                     {faseConcluida ? 'sólido encontrado!' : 'sólido não encontrado' }

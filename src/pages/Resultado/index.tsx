@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { IFase, IFaseState } from "../../interfaces/Fase";
+import { IFaseState } from "../../interfaces/Fase";
 import { useContext, useEffect, useState } from "react";
 import ProximoButton from "../../components/Resultado/ProximoButton";
 import DisplayRecompensas from "../../components/Resultado/DisplayRecompensas";
 import { api } from "../../api/axios";
 import { DialogosContext } from "../../context/Dialogos";
 import DialogosEnum from "../../enums/Dialogos";
+import { fase } from "../../types/fase";
 
 
 
@@ -16,7 +17,7 @@ export default function Resultado() {
     const {triggerDialog} = useContext(DialogosContext)
 
     const location = useLocation();
-    const fase = location.state?.fase as IFase
+    const fase:fase = location.state?.fase
     const faseState = location.state?.faseState as IFaseState
 
     const [estrelas, setEstrelas] = useState(0)
@@ -83,7 +84,8 @@ export default function Resultado() {
         <div className="bg-[url('/images/universo.jpg')] w-screen h-screen overflow-clip flex flex-col justify-around items-center">
             <p className="text-white select-none">recompensas</p>
 
-            <DisplayRecompensas 
+            <DisplayRecompensas
+                fase={fase} 
                 estrelas={estrelas} 
                 faseConcluida={faseConcluida} 
                 pontuacaoTotal={pontuacaoTotal} />
