@@ -9,6 +9,7 @@ import DialogosEnum from "../../enums/Dialogos";
 import { DialogosContext } from "../../context/Dialogos";
 import { fase } from "../../types/fase";
 import { IQuestao } from "../../interfaces/Questao";
+import SolidoComDescricao from "../../components/SolidoComDescricao";
 
 type FaseParams = {
     id: string;
@@ -113,13 +114,7 @@ export default function DescricaoFase() {
 
                     <div className="flex flex-col items-center gap-y-3.5">
                         <DisplayEstrelas estrelas={estrelas} />
-                        <div>
-                            {concluida 
-                                ? <img draggable="false" src={fase.solido.img_path} alt="Imagem da fase" className="w-40" />
-                                : <img draggable="false" src={fase.solido.img_path} alt="Imagem da fase" 
-                                       className="w-40 filter grayscale opacity-30" title="desaparecido" />
-                            }
-                        </div>
+                        <SolidoComDescricao fase={{concluida, solido: fase.solido}}/>
                         <p className="text-white">
                             melhor pontuação: {melhorPontuacao || 0} pts
                         </p>
