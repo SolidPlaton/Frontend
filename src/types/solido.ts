@@ -1,4 +1,5 @@
 export type solido = {
     nome: string,
-    img_path: string
+    img_path: string,
+    descricao: string
 }
