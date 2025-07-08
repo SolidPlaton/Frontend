@@ -7,6 +7,7 @@ import { api } from "../../api/axios";
 import { DialogosContext } from "../../context/Dialogos";
 import DialogosEnum from "../../enums/Dialogos";
 import { fase } from "../../types/fase";
+import MediaTempoUtilizado from "../../components/Resultado/MediaTempoUtilizado";
 
 
 
@@ -84,11 +85,14 @@ export default function Resultado() {
         <div className="bg-[url('/images/universo.jpg')] w-screen h-screen overflow-clip flex flex-col justify-around items-center">
             <p className="text-white select-none">recompensas</p>
 
-            <DisplayRecompensas
-                fase={fase} 
-                estrelas={estrelas} 
-                faseConcluida={faseConcluida} 
-                pontuacaoTotal={pontuacaoTotal} />
+            <div className="flex flex-col items-center gap-y-3.5">
+                <DisplayRecompensas
+                    fase={fase}
+                    estrelas={estrelas}
+                    faseConcluida={faseConcluida}
+                    pontuacaoTotal={pontuacaoTotal} />
+                <MediaTempoUtilizado respostas={faseState.respostas}/>
+            </div>
 
             <ProximoButton />
         </div>
