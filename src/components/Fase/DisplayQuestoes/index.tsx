@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import DisplayAlternativas from "../DisplayAlternativas"
 import ConfirmarButton from "../ConfirmarButton"
 import { FaseContext } from "../../../context/FaseContext"
@@ -20,21 +20,39 @@ export default function DisplayQuestoes() {
     const { timeLeft, pauseTimer, resetTimer } = useTimer(faseState.tempoInicial, enviarResposta);
     const [selecionada, setSelecionada] = useState<number | null>(null);
 
+    const [mostrarFeedback, setMostrarFeedback] = useState(false);
+    const [respostaAtual, setRespostaAtual] = useState<IResposta | null>(null);
+
+
+    useEffect(() => {
+        if (mostrarFeedback) {
+            const timeout = setTimeout(() => {
+            setMostrarFeedback(false);
+            }, 50000);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [mostrarFeedback]);
+
+
+
     const setHandleSelecionada = useCallback((index: number | null) => {
         setSelecionada(index);
     }, []);
 
 
     function enviarResposta() {
-        pauseTimer()
-        
-        const resposta:IResposta = {
+        pauseTimer();
+
+        const resposta: IResposta = {
             questionId: faseState.questaoAtualIndex,
             alternativaSelecionada: selecionada,
             tempoRestante: timeLeft,
-        }
+        };
 
-        corrigirAlternativa(resposta)
+        const respostaCorrigida = corrigirAlternativa(resposta);
+        setRespostaAtual(respostaCorrigida);
+        setMostrarFeedback(true);
     }
 
     function handleProximaQuestao() {
@@ -71,6 +89,69 @@ export default function DisplayQuestoes() {
                     selecionada={selecionada} 
                     callback={enviarResposta}
                     proxima={handleProximaQuestao} />
+
+                
+                {mostrarFeedback && respostaAtual && (
+                <div className="fixed inset-0 z-50 flex justify-center items-center pointer-events-auto">
+                    {/* Camada bloqueadora transparente (sem fundo preto!) */}
+                    <div className="fixed inset-0 bg-transparent backdrop-blur-sm pointer-events-auto" />
+
+                    {/* Modal */}
+                    <div className="relative bg-white text-black rounded-xl p-6 px-15 w-full max-w-sm text-center shadow-xl z-50 border border-zinc-700">
+                        <h2 className={`text-xl font-bold mb-2 ${respostaAtual.estaCorreta ? "text-green-600" : "text-red-600"}`}>
+                            {respostaAtual.estaCorreta ? "✅ Resposta Correta!" : "❌ Resposta Incorreta"}
+                        </h2>
+
+                        <div className="flex justify-between">
+                            <p className="mb-1">⏱️ Tempo utilizado: </p>
+                            <p>
+                                <strong>
+                                    {faseState.tempoInicial - (respostaAtual.tempoRestante ?? 0)} segundos
+                                </strong>
+                            </p>
+                        </div>
+
+
+                        <div className="flex justify-between">
+                            <p className="mb-1">Pontos ganhos: </p>
+                            
+                            <p>
+                                <strong>
+                                    +{respostaAtual.valorAcerto || 0} pts
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div className="flex justify-between">
+                            <p className="mb-1">Bônus de tempo: </p>
+                            
+                            <p>
+                                <strong>
+                                    +{respostaAtual.bonusTempo ? `${respostaAtual.bonusTempo}` : 0} pts
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div className="flex justify-between">
+                            <p className="mb-1">Total: </p>
+                            
+                            <p>
+                                <strong>
+                                    {(respostaAtual.valorAcerto || 0) + (respostaAtual.bonusTempo || 0)} pts
+                                </strong>
+                            </p>
+                        </div>
+
+                        <button
+                            onClick={() => setMostrarFeedback(false)}
+                            className="mt-4 px-4 py-2 bg-zinc-800 text-white rounded hover:bg-zinc-700"
+                        >
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+                )}
+
 
         </BackgroundQuestao>
     )

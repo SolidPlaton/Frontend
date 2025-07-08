@@ -13,7 +13,7 @@ interface IFaseContext {
     questoes: IQuestao[]
     faseState: IFaseState
     proximaQuestao: () => void
-    corrigirAlternativa: (resposta: IResposta) => void
+    corrigirAlternativa: (resposta: IResposta) => IResposta
 }
 
 export const FaseContext = createContext({} as IFaseContext)
@@ -48,21 +48,24 @@ export default function FaseContextProvider({children}:Props) {
 
 
 
-    function corrigirAlternativa(resposta: IResposta) {
-        const { alternativaCorreta } = questoes[faseState.questaoAtualIndex]
-        resposta = scoreCalculation(resposta, alternativaCorreta, faseState.tempoInicial)
+    function corrigirAlternativa(resposta: IResposta): IResposta {
+        const { alternativaCorreta } = questoes[faseState.questaoAtualIndex];
+        resposta = scoreCalculation(resposta, alternativaCorreta, faseState.tempoInicial);
 
         setFaseState(prevState => {
-            const copiaRespostas = [...prevState.respostas]
-            copiaRespostas[prevState.questaoAtualIndex] = resposta
+            const copiaRespostas = [...prevState.respostas];
+            copiaRespostas[prevState.questaoAtualIndex] = resposta;
 
-            const pontuacaoTotal    = calcularPontuacaoTotal(copiaRespostas)
-            const respostasCorretas = copiaRespostas.filter(r => r && r.estaCorreta).length
-            const faseConcluida     = respostasCorretas >= 3
+            const pontuacaoTotal = calcularPontuacaoTotal(copiaRespostas);
+            const respostasCorretas = copiaRespostas.filter(r => r && r.estaCorreta).length;
+            const faseConcluida = respostasCorretas >= 3;
 
-            return { ...prevState, respostas: copiaRespostas, pontuacaoTotal, respostasCorretas, faseConcluida }
+            return { ...prevState, respostas: copiaRespostas, pontuacaoTotal, respostasCorretas, faseConcluida };
         });
-    };
+
+        return resposta;
+    }
+
 
 
     function proximaQuestao() {
