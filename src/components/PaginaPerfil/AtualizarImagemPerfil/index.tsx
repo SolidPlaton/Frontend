@@ -36,10 +36,14 @@ export default function AtualizarImagemPerfil() {
 
     return (
         <>
-            <div onClick={() => setMostrarModal(true)} className="cursor-pointer">
+            <div onClick={() => setMostrarModal(true)} className="cursor-pointer relative">
                 <img className="w-40 rounded-full border-4 border-white"
                     src={user?.imagemPerfilUrl || "/images/perfil/no-profile-photo-min.png"} 
                     alt="Foto de Perfil" />
+                <div className="absolute bottom-2 right-1 flex flex-row gap-x-1.5 w-16 bg-black border-amber-50 border-2 rounded">
+                    <img src="/images/icons/pencil-simple.svg" alt="edit" />
+                    <p>Edit</p>
+                </div>
             </div>
 
             {mostrarModal && (
