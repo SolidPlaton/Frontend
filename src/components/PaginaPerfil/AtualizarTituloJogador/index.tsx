@@ -33,7 +33,7 @@ export default function AtualizarTituloJogador() {
     }
 
     return (
-        <div className="mt-4">
+        <div className="mt-2">
             <select
                 className="bg-gray-800 text-white px-4 py-2 rounded cursor-pointer"
                 value={user?.tituloJogador || titulosDeJogador[0]}

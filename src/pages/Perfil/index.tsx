@@ -32,16 +32,15 @@ export default function Perfil() {
         <Layout>
             <div className="w-full my-12 flex flex-col justify-center items-center text-white relative">
 
+                <AtualizarImagemPerfil />
                 
                 <h2 className="text-3xl mt-4">
                     {user?.nome}
                 </h2>
 
-                <AtualizarImagemPerfil />
-
                 <AtualizarTituloJogador />
 
-                <p>está na posição #{userRankingPosicao}</p>
+                <p className="mt-4">está na posição #{userRankingPosicao}</p>
 
             </div>
         </Layout>
