@@ -24,15 +24,15 @@ export default function DisplayQuestoes() {
     const [respostaAtual, setRespostaAtual] = useState<IResposta | null>(null);
 
 
-    useEffect(() => {
-        if (mostrarFeedback) {
-            const timeout = setTimeout(() => {
-            setMostrarFeedback(false);
-            }, 50000);
+    // useEffect(() => {
+    //     if (mostrarFeedback) {
+    //         const timeout = setTimeout(() => {
+    //         setMostrarFeedback(false);
+    //         }, 50000);
 
-            return () => clearTimeout(timeout);
-        }
-    }, [mostrarFeedback]);
+    //         return () => clearTimeout(timeout);
+    //     }
+    // }, [mostrarFeedback]);
 
 
 
@@ -97,13 +97,12 @@ export default function DisplayQuestoes() {
                     <div className="fixed inset-0 bg-transparent backdrop-blur-sm pointer-events-auto" />
 
                     {/* Modal */}
-                    <div className="relative bg-white text-black rounded-xl p-6 px-15 w-full max-w-sm text-center shadow-xl z-50 border border-zinc-700">
-                        <h2 className={`text-xl font-bold mb-2 ${respostaAtual.estaCorreta ? "text-green-600" : "text-red-600"}`}>
+                    <div className="relative bg-gray-800 text-sky-100 rounded-xl p-6 px-15 w-full max-w-sm text-center shadow-xl z-50 border border-zinc-700">
+                        <h2 className={`text-xl font-bold mb-2 ${respostaAtual.estaCorreta ? "text-green-400" : "text-red-400"}`}>
                             {respostaAtual.estaCorreta ? "✅ Resposta Correta!" : "❌ Resposta Incorreta"}
                         </h2>
 
-                        <div className="flex justify-between">
-                            <p className="mb-1">⏱️ Tempo utilizado: </p>
+                        <div className="w-full flex justify-center mb-2.5">
                             <p>
                                 <strong>
                                     {faseState.tempoInicial - (respostaAtual.tempoRestante ?? 0)} segundos
@@ -113,38 +112,44 @@ export default function DisplayQuestoes() {
 
 
                         <div className="flex justify-between">
+                            <div className="flex flex-row items-center justify-items-start">
+                                <img src="/images/icons/coin.svg" alt="coin" />
+                                <p className="mb-1">resposta: </p>
+                            </div>
+                            
+                            <p>
+                                <strong>
+                                    {respostaAtual.valorAcerto || 0} pts
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div className="flex justify-between">
+                            <div className="flex flex-row items-center justify-items-start">
+                                <img src="/images/icons/hourglass-medium.svg" alt="hourglass" />
+                                <p className="mb-1">bônus de tempo: </p>
+                            </div>
+                            
+                            <p>
+                                <strong>
+                                    {respostaAtual.bonusTempo ? `${respostaAtual.bonusTempo}` : 0} pts
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div className="flex justify-between">
                             <p className="mb-1">Pontos ganhos: </p>
                             
                             <p>
                                 <strong>
-                                    +{respostaAtual.valorAcerto || 0} pts
-                                </strong>
-                            </p>
-                        </div>
-
-                        <div className="flex justify-between">
-                            <p className="mb-1">Bônus de tempo: </p>
-                            
-                            <p>
-                                <strong>
-                                    +{respostaAtual.bonusTempo ? `${respostaAtual.bonusTempo}` : 0} pts
-                                </strong>
-                            </p>
-                        </div>
-
-                        <div className="flex justify-between">
-                            <p className="mb-1">Total: </p>
-                            
-                            <p>
-                                <strong>
-                                    {(respostaAtual.valorAcerto || 0) + (respostaAtual.bonusTempo || 0)} pts
+                                    +{(respostaAtual.valorAcerto || 0) + (respostaAtual.bonusTempo || 0)} pts
                                 </strong>
                             </p>
                         </div>
 
                         <button
                             onClick={() => setMostrarFeedback(false)}
-                            className="mt-4 px-4 py-2 bg-zinc-800 text-white rounded hover:bg-zinc-700"
+                            className="mt-4 px-4 py-2 bg-white text-zinc-800 rounded hover:bg-sky-200"
                         >
                             Fechar
                         </button>
