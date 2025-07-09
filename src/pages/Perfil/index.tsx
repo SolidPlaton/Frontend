@@ -4,6 +4,7 @@ import { api } from "../../api/axios";
 import { IUsuarioRanking } from "../../interfaces/Ranking";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import AtualizarTituloJogador from "../../components/PaginaPerfil/AtualizarTituloJogador";
 
 const imagensPerfil = [
     "/images/perfil/no-profile-photo-min.png",
@@ -64,9 +65,7 @@ export default function Perfil() {
                     {user?.nome}
                 </h2>
 
-                <h3 className="text-2xl mt-4">
-                    {user?.tituloJogador}
-                </h3>
+                <AtualizarTituloJogador />
 
                 <p>está na posição #{userRankingPosicao}</p>
 
