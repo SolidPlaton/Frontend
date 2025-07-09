@@ -113,7 +113,7 @@ export default function DisplayQuestoes() {
 
                         <div className="flex justify-between">
                             <div className="flex flex-row items-center justify-items-start">
-                                <img src="/images/icons/coin.svg" alt="coin" />
+                                <img src="/images/icons/target.svg" alt="coin" />
                                 <p className="mb-1">resposta: </p>
                             </div>
                             
