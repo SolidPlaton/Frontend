@@ -32,7 +32,7 @@ export default function Menu() {
           <NavButton name="campanha" path_icon={path_duotone} to="/campanha" currentPath={location.pathname} />
           <NavButton name="desafios" path_icon={puzzle_piece_duotone} to="/desafios" currentPath={location.pathname} />
           <NavButton name="ranking" path_icon={ranking_duotone} to="/ranking" currentPath={location.pathname} />
-          <NavButton name="perfil" path_icon={user_circle_duotone} to="/perfil" currentPath={location.pathname} />
+          <NavButton name="perfil" path_icon={user_circle_duotone} to={`/usuario/${auth.user?.id}`} currentPath={location.pathname} />
         </div>
       </div>
       <h2 onClick={handleSignout} className="text-red-500 cursor-pointer">Sair</h2>

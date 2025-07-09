@@ -8,6 +8,7 @@ import Fase from "./pages/Fase";
 import Resultado from "./pages/Resultado";
 import Ranking from "./pages/Ranking";
 import { useEffect } from "react";
+import Perfil from "./pages/Perfil";
 
 export function Router() {
     const {user} = useAuth()
@@ -44,6 +45,7 @@ export function Router() {
                     <Route path="/fase/:id/questoes" element={ <Fase /> } />
                     <Route path="/fase/resultado" element={ <Resultado /> } />
                     <Route path="/ranking" element={ <Ranking /> } />
+                    <Route path="/usuario/:id" element={ <Perfil /> } />
                     </>
                 )
             }
