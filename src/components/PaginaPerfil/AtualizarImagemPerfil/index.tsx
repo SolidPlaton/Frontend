@@ -4,7 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 
 
 const imagensPerfil = [
-    "/images/perfil/no-profile-photo-min.png",
+    "/images/perfil/no-profile-photo-min.jpg",
     "/images/solidos/dodecaedro.png",
     "/images/solidos/hexaedro.png",
     "/images/solidos/icosaedro.png",

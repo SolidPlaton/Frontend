@@ -53,7 +53,7 @@ export default function Ranking() {
                             posicao={index + 1}
                             id={usuario.id}
                             nome={usuario.nome}
-                            imagemPerfilUrl={usuario.imagemPerfilUrl}
+                            imagemPerfilUrl={usuario.imagemPerfilUrl || "/images/perfil/no-profile-photo-min.jpg"}
                             pontuacaoTotal={usuario.pontuacaoTotal} />
                     ))}
                 </div>
