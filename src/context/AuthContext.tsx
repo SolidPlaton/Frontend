@@ -32,6 +32,7 @@ interface IAuthContext {
     user: IUsuario | null
     logar: (email:string, password:string) => Promise<void>
     deslogar: () => Promise<void>
+    atualizarUser: (user: IUsuario) => void;
     setUser: (user: IUsuario) => void;
 }
 
@@ -85,6 +86,12 @@ export function AuthProvider({children}:Props) {
     }
 
 
+    function atualizarUser(user: IUsuario) {
+        setUser(user);
+        localStorage.setItem('auth.user', JSON.stringify(user));
+    }
+
+
     useEffect(() => {
         const token = localStorage.getItem('auth.token')
         // console.log(token)
@@ -100,7 +107,7 @@ export function AuthProvider({children}:Props) {
 
 
     return (
-        <AuthContext.Provider value={{user, logar, deslogar, setUser}}>
+        <AuthContext.Provider value={{user, logar, deslogar, atualizarUser, setUser}}>
             {children}
         </AuthContext.Provider>
     )
