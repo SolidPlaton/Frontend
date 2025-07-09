@@ -24,15 +24,15 @@ export default function DisplayQuestoes() {
     const [respostaAtual, setRespostaAtual] = useState<IResposta | null>(null);
 
 
-    // useEffect(() => {
-    //     if (mostrarFeedback) {
-    //         const timeout = setTimeout(() => {
-    //         setMostrarFeedback(false);
-    //         }, 50000);
+    useEffect(() => {
+        if (mostrarFeedback) {
+            const timeout = setTimeout(() => {
+            setMostrarFeedback(false);
+            }, 50000);
 
-    //         return () => clearTimeout(timeout);
-    //     }
-    // }, [mostrarFeedback]);
+            return () => clearTimeout(timeout);
+        }
+    }, [mostrarFeedback]);
 
 
 
