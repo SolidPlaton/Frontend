@@ -54,7 +54,8 @@ export default function Ranking() {
                             id={usuario.id}
                             nome={usuario.nome}
                             imagemPerfilUrl={usuario.imagemPerfilUrl}
-                            pontuacaoTotal={usuario.pontuacaoTotal} />
+                            pontuacaoTotal={usuario.pontuacaoTotal} 
+                            titulo={usuario.tituloJogador}/>
                     ))}
                 </div>
 
