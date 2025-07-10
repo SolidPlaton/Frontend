@@ -25,7 +25,7 @@ export default function Menu() {
   }
 
   return (
-    <nav className="flex flex-col items-center justify-between bg-slate-900 min-w-52 h-screen pt-12 pb-5">
+    <nav className="fixed left-0 top-0 z-50 flex flex-col items-center justify-between bg-slate-900 min-w-52 h-screen pt-12 pb-5">
       <div className="flex flex-col gap-y-12 items-center">
         <h2 className="text-white text-3xl font-bold font-inria-sans">Solid Platon</h2>
         <div className="flex flex-col gap-y-4">
