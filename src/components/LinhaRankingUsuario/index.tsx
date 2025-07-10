@@ -22,11 +22,10 @@ export default function LinhaRankingUsuario({ posicao, id, nome, imagemPerfilUrl
       <div className="flex flex-row justify-between items-center gap-x-2">
         <span>{posicao}</span>
         
-        {imagemPerfilUrl ? (
-          <img src={imagemPerfilUrl} alt={nome} className="w-10 h-10 rounded-full" />
-        ) : (
-          <div className="w-10 h-10 bg-sky-50"></div>
-        )}
+
+        <img src={imagemPerfilUrl || "/images/perfil/no-profile-photo-min.jpg"} 
+             alt={nome} 
+             className="w-10 h-10 rounded-full" />
         
         <p>{nome}</p>
 
