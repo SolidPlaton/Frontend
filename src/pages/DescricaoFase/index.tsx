@@ -87,7 +87,7 @@ export default function DescricaoFase() {
                 </div>
             </Link>
 
-            <div className="w-full mb-28 flex flex-col justify-between items-center gap-y-6 mt-5">
+            <div className="w-full mb-24 flex flex-col justify-between items-center gap-y-6 mt-5">
                 <p className="text-3xl text-white select-none">{fase.nome}</p>
 
                 <div>
@@ -126,7 +126,7 @@ export default function DescricaoFase() {
             </div>
 
 
-            <div className="flex flex-row justify-center m-14">
+            <div className="flex flex-row justify-center m-14 mb-0">
                 <button
                     onClick={handleIniciar}
                     className="bg-fuchsia-950 text-white h-12 w-48 rounded-xl cursor-pointer
