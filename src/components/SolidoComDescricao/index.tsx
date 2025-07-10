@@ -32,11 +32,11 @@ export default function SolidoComDescricao({ fase }: Props) {
       onMouseLeave={handleMouseLeave}
     >
       {hovering && (
-        <div className="absolute right-full mr-4 top-0 w-72 bg-white shadow-xl border border-gray-300 rounded-xl p-4 z-10">
-          <h2 className="text-lg font-bold mb-2">{fase.solido.nome}</h2>
-          <p className="text-sm text-gray-700">{fase.solido.descricao}</p>
+        <div className="absolute right-full mr-4 top-0 w-72 bg-gray-800 shadow-xl border border-gray-300 rounded-xl p-4 z-10">
+          <h2 className="text-lg text-sky-100 font-bold mb-2">{fase.solido.nome}</h2>
+          <p className="text-sm text-sky-100">{fase.solido.descricao}</p>
 
-          <div className="mt-4 border-t pt-2 text-xs text-blue-600">
+          <div className="mt-4 border-t pt-2 text-xs text-blue-300">
             <p className="font-semibold mb-1">Saiba Mais:</p>
             <ul className="list-disc list-inside space-y-1">
               <li>
