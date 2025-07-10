@@ -5,17 +5,14 @@ type Props = {
     children: ReactNode
 }
 
-export default function Layout({ children }:Props) {
-
+export default function Layout({ children }: Props) {
     return (
-        <div className="flex flex-row w-screen h-screen">
+        <div className="bg-[url('/images/universo.jpg')] bg-repeat-y flex flex-row min-h-screen overflow-x-hidden">
             <Menu />
 
-            <div className="bg-[url('/images/universo.jpg')] w-screen h-screen overflow-hidden
-                relative">
-                    {children}
+            <div className="flex-1 relative ml-48">
+                {children}
             </div>
         </div>
-    )
-
+    );
 }
