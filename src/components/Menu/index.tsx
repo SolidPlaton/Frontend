@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import path_duotone from '../../assets/menu-icons/path-duotone.svg'
+import clipboard from '../../assets/menu-icons/clipboard-text.svg';
 import puzzle_piece_duotone from '../../assets/menu-icons/puzzle-piece-duotone.svg'
 import ranking_duotone from '../../assets/menu-icons/ranking-duotone.svg'
 import user_circle_duotone from '../../assets/menu-icons/user-circle-duotone.svg'
@@ -33,6 +34,7 @@ export default function Menu() {
           <NavButton name="desafios" path_icon={puzzle_piece_duotone} to="/desafios" currentPath={location.pathname} />
           <NavButton name="ranking" path_icon={ranking_duotone} to="/ranking" currentPath={location.pathname} />
           <NavButton name="perfil" path_icon={user_circle_duotone} to={`/usuario/${auth.user?.id}`} currentPath={location.pathname} />
+          <NavButton name="sobre" path_icon={clipboard} to={`/sobre`} currentPath={location.pathname} />
         </div>
       </div>
       <h2 onClick={handleSignout} className="text-red-500 cursor-pointer">Sair</h2>
