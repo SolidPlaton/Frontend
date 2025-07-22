@@ -8,6 +8,7 @@ import { DialogosContext } from "../../context/Dialogos";
 import DialogosEnum from "../../enums/Dialogos";
 import { fase } from "../../types/fase";
 import MediaTempoUtilizado from "../../components/Resultado/MediaTempoUtilizado";
+import { atualizarConquistas } from "../../utils/atualizarConquistas";
 
 
 
@@ -36,6 +37,7 @@ export default function Resultado() {
             try {
                 if (valor > 0) {
                     const response =  await api.patch(`/api/fase/${fase.id}/pontuacao`, { valor })
+                    atualizarConquistas()
                 }
             } catch (error) {
                 console.error("Erro ao salvar Fase no Banco", error);
@@ -46,11 +48,13 @@ export default function Resultado() {
             try {
                 if (quantidade > 0) {
                     const response =  await api.patch(`/api/fase/${fase.id}/estrelas`, { quantidade })
+                    atualizarConquistas()
                 }
             } catch (error) {
                 console.error("Erro ao salvar Fase no Banco", error);
             }
         }
+
 
         salvarPontuacao(faseState.pontuacaoTotal)
         salvarEstrelas(faseState.respostasCorretas)
