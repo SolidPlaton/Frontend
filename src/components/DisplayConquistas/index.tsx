@@ -33,7 +33,7 @@ export default function DisplayConquistas() {
 
     return (
 
-        <div className="flex flex-col gap-y-3.5">
+        <div className="flex flex-col gap-y-3.5 mt-7">
             <h3 className="text-[28px] select-none">Conquistas</h3>
 
             <div className="flex flex-row gap-x-6">
