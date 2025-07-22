@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import AtualizarTituloJogador from "../../components/PaginaPerfil/AtualizarTituloJogador";
 import AtualizarImagemPerfil from "../../components/PaginaPerfil/AtualizarImagemPerfil";
+import DisplayConquistas from "../../components/DisplayConquistas";
 
 
 export default function Perfil() {
@@ -42,6 +43,8 @@ export default function Perfil() {
 
                 <p className="mt-4">está na posição #{userRankingPosicao}</p>
 
+
+                <DisplayConquistas />
             </div>
         </Layout>
     );
