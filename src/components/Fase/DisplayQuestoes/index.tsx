@@ -24,8 +24,18 @@ export default function DisplayQuestoes() {
     const [respostaAtual, setRespostaAtual] = useState<IResposta | null>(null);
 
 
+    const correctSound = new Audio("/sound/correct-6033.mp3");
+    const wrongSound = new Audio("/sound/wrong-buzzer-6268.mp3");
+
     useEffect(() => {
         if (mostrarFeedback) {
+
+            if (respostaAtual?.estaCorreta) {
+                correctSound.play().catch(() => {});
+            } else {
+                wrongSound.play().catch(() => {});
+            }
+
             const timeout = setTimeout(() => {
             setMostrarFeedback(false);
             }, 50000);
