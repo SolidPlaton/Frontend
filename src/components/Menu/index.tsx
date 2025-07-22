@@ -31,7 +31,7 @@ export default function Menu() {
         <h2 className="text-white text-3xl font-bold font-inria-sans">Solid Platon</h2>
         <div className="flex flex-col gap-y-4">
           <NavButton name="campanha" path_icon={path_duotone} to="/campanha" currentPath={location.pathname} />
-          <NavButton name="desafios" path_icon={puzzle_piece_duotone} to="/desafios" currentPath={location.pathname} />
+          {/* <NavButton name="desafios" path_icon={puzzle_piece_duotone} to="/desafios" currentPath={location.pathname} /> */}
           <NavButton name="ranking" path_icon={ranking_duotone} to="/ranking" currentPath={location.pathname} />
           <NavButton name="perfil" path_icon={user_circle_duotone} to={`/usuario/${auth.user?.id}`} currentPath={location.pathname} />
           <NavButton name="sobre" path_icon={clipboard} to={`/sobre`} currentPath={location.pathname} />
