@@ -33,31 +33,27 @@ export default function Resultado() {
             return
         }
 
-        const salvarPontuacao = async (valor:number) => {
+        const salvarDadosDaFase = async () => {
             try {
-                if (valor > 0) {
-                    const response =  await api.patch(`/api/fase/${fase.id}/pontuacao`, { valor })
-                    atualizarConquistas()
+                const promises = []
+
+                if (faseState.pontuacaoTotal > 0) {
+                    promises.push(api.patch(`/api/fase/${fase.id}/pontuacao`, { valor: faseState.pontuacaoTotal }))
                 }
+
+                if (faseState.respostasCorretas > 0) {
+                    promises.push(api.patch(`/api/fase/${fase.id}/estrelas`, { quantidade: faseState.respostasCorretas }))
+                }
+
+                await Promise.all(promises)
+
+                atualizarConquistas()
             } catch (error) {
                 console.error("Erro ao salvar Fase no Banco", error);
             }
         }
 
-        const salvarEstrelas = async (quantidade:number) => {
-            try {
-                if (quantidade > 0) {
-                    const response =  await api.patch(`/api/fase/${fase.id}/estrelas`, { quantidade })
-                    atualizarConquistas()
-                }
-            } catch (error) {
-                console.error("Erro ao salvar Fase no Banco", error);
-            }
-        }
-
-
-        salvarPontuacao(faseState.pontuacaoTotal)
-        salvarEstrelas(faseState.respostasCorretas)
+        salvarDadosDaFase()
 
         setEstrelas(faseState.respostasCorretas)
         setFaseConcluida(faseState.faseConcluida)
