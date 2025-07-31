@@ -60,6 +60,9 @@ export default function Resultado() {
         setPontuacaoTotal(faseState.pontuacaoTotal)
 
         switch (faseState.respostasCorretas) {
+            case 0: 
+                triggerDialog(DialogosEnum.zero_estrelas)
+                break;
             case 1: 
                 triggerDialog(DialogosEnum.uma_estrela)
                 break;

@@ -11,7 +11,8 @@ enum DialogosEnum {
     duas_estrelas = "duas-estrelas",
     tres_estrelas = "tres-estrelas",
     quatro_estrelas = "quatro-estrelas",
-    cinco_estrelas = "cinco-estrelas"
+    cinco_estrelas = "cinco-estrelas",
+    zero_estrelas = "zero-estrelas"
 }
 
 
