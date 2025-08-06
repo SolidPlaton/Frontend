@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { useAuth } from "./hooks/useAuth";
-import Cadastro from "./pages/Cadastro";
 import Campanha from "./pages/Campanha";
 import DescricaoFase from "./pages/DescricaoFase";
 import Fase from "./pages/Fase";
@@ -34,7 +33,6 @@ export function Router() {
                     <>
                     <Route index element={<Login />} />
                     <Route index path="/login" element={ <Login /> } />
-                    <Route path="/cadastro" element={ <Cadastro /> } />
                     </>
                 )
                 :
