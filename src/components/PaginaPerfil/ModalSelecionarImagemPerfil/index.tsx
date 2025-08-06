@@ -1,6 +1,8 @@
 
 const imagensPerfil = [
     "/images/perfil/no-profile-photo-min.jpg",
+    "/images/perfil/platao.png",
+    "/images/perfil/dice.png",
     "/images/solidos/dodecaedro.png",
     "/images/solidos/hexaedro.png",
     "/images/solidos/icosaedro.png",
