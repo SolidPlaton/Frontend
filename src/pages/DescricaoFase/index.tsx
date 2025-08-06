@@ -107,7 +107,7 @@ export default function DescricaoFase() {
                     <ul className="list-disc list-inside space-y-2">
                         <li>✅ <strong className="text-teal-500">+500 pontos</strong> e <strong className="text-teal-500">1 Estrela</strong> por questão correta.</li>
                         <li>⏱️ Você tem <strong className="text-teal-500">até 5 minutos</strong> para responder cada questão.</li>
-                        <li>⚡ Bônus de <strong className="text-teal-500">+200 pontos bônus</strong> para respostas em <strong className="text-teal-500">menos de 3 minutos!</strong></li>
+                        <li>⚡ Bônus de <strong className="text-teal-500">+200 pontos </strong> para respostas em <strong className="text-teal-500">menos de 3 minutos!</strong></li>
                         <li>🆙 Acerte <strong className="text-teal-500">pelo menos 3 questões</strong> para passar de fase.</li>
                     </ul>
                 </div>
